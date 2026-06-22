@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nice to Meet You, Gabriela! — Class 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:       #F472B6;
+    --pink-light: #FCE7F3;
+    --pink-mid:   #FBCFE8;
+    --pink-dark:  #BE185D;
+    --yellow:     #FBBF24;
+    --yellow-light:#FEF9C3;
+    --yellow-mid: #FDE68A;
+    --yellow-dark:#92400E;
+    --white:      #FFFFFF;
+    --gray-50:    #FFF8FC;
+    --gray-100:   #F3F4F6;
+    --gray-400:   #9CA3AF;
+    --gray-600:   #4B5563;
+    --gray-800:   #1F2937;
+    --radius-sm:  8px;
+    --radius-md:  14px;
+    --radius-lg:  22px;
+    --radius-xl:  32px;
+    --font-head:  'Nunito', sans-serif;
+    --font-body:  'Nunito Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--gray-50);
+    color: var(--gray-800);
+    min-height: 100vh;
+  }
+
+  /* ── TOP NAV ── */
+  .topbar {
+    background: var(--white);
+    border-bottom: 2px solid var(--pink-mid);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topbar::-webkit-scrollbar { display: none; }
+  .topbar-logo {
+    font-family: var(--font-head);
+    font-weight: 900;
+    font-size: 17px;
+    color: var(--pink-dark);
+    white-space: nowrap;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.9rem 1rem;
+    border: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-400);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  .nav-btn .nav-icon { font-size: 16px; }
+  .nav-btn:hover { color: var(--pink-dark); }
+  .nav-btn.active { color: var(--pink-dark); border-bottom-color: var(--pink); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap {
+    background: var(--pink-light);
+    height: 6px;
+    width: 100%;
+  }
+  .progress-bar-fill {
+    height: 6px;
+    background: linear-gradient(90deg, var(--pink), var(--yellow));
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 2rem 1.5rem; max-width: 800px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* ── HERO (Section 0) ── */
+  .hero-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--pink-mid);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-stars {
+    font-size: 28px;
+    letter-spacing: 4px;
+    margin-bottom: 0.75rem;
+  }
+  .hero-title {
+    font-family: var(--font-head);
+    font-weight: 900;
+    font-size: clamp(28px, 5vw, 42px);
+    color: var(--pink-dark);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title span { color: var(--yellow-dark); }
+  .hero-subtitle {
+    font-size: 16px;
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .intro-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .intro-card {
+    background: var(--pink-light);
+    border-radius: var(--radius-md);
+    padding: 1rem 0.75rem;
+    text-align: center;
+    border: 1.5px solid var(--pink-mid);
+    cursor: default;
+    transition: transform 0.15s;
+  }
+  .intro-card:hover { transform: translateY(-3px); }
+  .intro-card-icon { font-size: 30px; margin-bottom: 6px; }
+  .intro-card-label { font-family: var(--font-head); font-weight: 700; font-size: 13px; color: var(--pink-dark); }
+  .intro-card-en { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+  .teacher-intro {
+    background: var(--yellow-light);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--yellow-mid);
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  .teacher-intro h3 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--yellow-dark);
+    margin-bottom: 0.5rem;
+  }
+  .teacher-intro p { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+  .phrase-box {
+    background: var(--pink-dark);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.3px;
+  }
+  .phrase-box small {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0.75;
+    margin-top: 4px;
+    font-family: var(--font-body);
+  }
+
+  /* ── THIS OR THAT (Section 1) ── */
+  .section-title {
+    font-family: var(--font-head);
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--pink-dark);
+    margin-bottom: 0.25rem;
+  }
+  .section-desc { font-size: 14px; color: var(--gray-600); margin-bottom: 1.5rem; line-height: 1.6; }
+  .score-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: var(--white);
+    border: 1.5px solid var(--pink-mid);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .score-player { text-align: center; }
+  .score-player-name { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; }
+  .score-player-num { font-family: var(--font-head); font-weight: 900; font-size: 28px; color: var(--pink-dark); }
+  .score-divider { font-size: 22px; }
+  .round-label { text-align: center; font-size: 12px; color: var(--gray-400); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+  .question-label { text-align: center; font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--gray-800); margin-bottom: 1.25rem; }
+  .tot-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.25rem; }
+  .tot-card {
+    background: var(--white);
+    border: 2px solid var(--pink-mid);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.12s, background 0.15s;
+  }
+  .tot-card:hover { border-color: var(--pink); transform: translateY(-2px); }
+  .tot-card.sel-g { border-color: #ec4899; background: var(--pink-light); }
+  .tot-card.sel-t { border-color: var(--yellow); background: var(--yellow-light); }
+  .tot-card.sel-both { border-color: #8b5cf6; background: #EDE9FE; }
+  .tot-emoji { font-size: 52px; line-height: 1; margin-bottom: 8px; }
+  .tot-word { font-family: var(--font-head); font-weight: 800; font-size: 18px; color: var(--gray-800); }
+  .tot-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .badge-g { background: var(--pink-mid); color: var(--pink-dark); }
+  .badge-t { background: var(--yellow-mid); color: var(--yellow-dark); }
+  .badge-both { background: #DDD6FE; color: #5B21B6; }
+  .tot-btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .pick-btn {
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--pink-mid);
+    background: var(--white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s, opacity 0.15s;
+  }
+  .pick-btn:hover { background: var(--pink-light); border-color: var(--pink); }
+  .pick-btn.faded { opacity: 0.35; }
+  .pick-btn-next {
+    padding: 10px 28px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--pink-dark);
+    color: var(--white);
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    display: none;
+    margin: 0 auto;
+    transition: background 0.12s;
+  }
+  .pick-btn-next:hover { background: #9d174d; }
+  .legend-strip { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; font-size: 12px; color: var(--gray-400); font-weight: 600; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: middle; }
+  .tot-result { display: none; text-align: center; padding: 2rem 1rem; }
+  .tot-result.show { display: block; }
+  .result-big { font-size: 64px; }
+  .result-title { font-family: var(--font-head); font-weight: 900; font-size: 26px; color: var(--pink-dark); margin: 0.75rem 0 0.25rem; }
+  .result-sub { font-size: 15px; color: var(--gray-600); margin-bottom: 1rem; }
+  .result-badge { display: inline-block; padding: 6px 18px; background: var(--pink-light); color: var(--pink-dark); border-radius: 20px; font-size: 14px; font-weight: 700; margin-bottom: 1.5rem; }
+
+  /* ── PASSPORT (Section 2) ── */
+  .passport-wrap {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--pink-mid);
+    overflow: hidden;
+  }
+  .passport-header {
+    background: var(--pink-dark);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .passport-icon-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .passport-htitle { color: var(--white); font-family: var(--font-head); font-weight: 900; font-size: 18px; }
+  .passport-hsub { color: #fbb6d0; font-size: 13px; margin-top: 2px; }
+  .passport-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .avatar-pick-row { display: flex; align-items: flex-start; gap: 1rem; }
+  .avatar-circle {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    border: 2.5px solid var(--pink-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 38px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.15s;
+  }
+  .avatar-circle:hover { border-color: var(--pink-dark); }
+  .avatar-hint { font-size: 11px; color: var(--gray-400); text-align: center; margin-top: 4px; }
+  .avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+    padding: 0.75rem;
+    background: var(--gray-100);
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--pink-mid);
+    display: none;
+    flex: 1;
+  }
+  .avatar-opt { font-size: 24px; cursor: pointer; text-align: center; padding: 5px; border-radius: var(--radius-sm); transition: background 0.12s; }
+  .avatar-opt:hover { background: var(--pink-light); }
+  .avatar-opt.sel { background: var(--pink-mid); }
+  .field-label { font-size: 11px; font-weight: 700; color: var(--pink-dark); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px; }
+  .field-input {
+    width: 100%;
+    padding: 9px 13px;
+    border: 1.5px solid var(--pink-mid);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: var(--font-body);
+    color: var(--gray-800);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field-input:focus { outline: none; border-color: var(--pink-dark); box-shadow: 0 0 0 3px var(--pink-light); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .emoji-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 0.75rem;
+    background: var(--gray-100);
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--pink-mid);
+  }
+  .emoji-opt {
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid transparent;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .emoji-opt:hover { background: var(--pink-light); }
+  .emoji-opt.sel { background: var(--pink-light); border-color: var(--pink-dark); }
+  .pick-display { font-size: 12px; color: var(--gray-400); margin-top: 4px; min-height: 18px; font-weight: 600; }
+  .sticker-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sticker { font-size: 22px; cursor: pointer; padding: 5px 8px; border-radius: var(--radius-sm); border: 1.5px solid transparent; transition: background 0.12s, border-color 0.12s; }
+  .sticker:hover { background: var(--yellow-light); }
+  .sticker.sel { background: var(--yellow-light); border-color: var(--yellow); }
+  .divider { height: 1.5px; background: var(--pink-light); }
+  .story-preview { padding: 1.25rem 1.5rem; background: var(--yellow-light); border-top: 1.5px solid var(--yellow-mid); }
+  .story-preview-label { font-size: 11px; font-weight: 700; color: var(--yellow-dark); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 0.6rem; }
+  .story-preview-text { font-size: 15px; color: var(--gray-800); line-height: 1.9; min-height: 72px; }
+  .story-sentence { padding: 2px 0; }
+  .story-empty { color: var(--gray-400); font-style: italic; font-size: 14px; }
+  .passport-actions { padding: 1rem 1.5rem; border-top: 1.5px solid var(--pink-light); display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ── STORY (Section 3) ── */
+  .story-builder-wrap { background: var(--white); border-radius: var(--radius-xl); border: 2px solid var(--pink-mid); overflow: hidden; }
+  .story-builder-head { background: var(--yellow); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px; }
+  .story-head-icon { font-size: 32px; }
+  .story-head-title { font-family: var(--font-head); font-weight: 900; font-size: 18px; color: var(--yellow-dark); }
+  .story-head-sub { font-size: 13px; color: #78350f; margin-top: 2px; }
+  .story-body { padding: 1.5rem; }
+  .story-sentence-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .story-num { width: 28px; height: 28px; border-radius: 50%; background: var(--pink-light); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 800; font-size: 13px; color: var(--pink-dark); flex-shrink: 0; }
+  .story-sentence-text {
+    flex: 1;
+    padding: 9px 13px;
+    border: 1.5px solid var(--pink-mid);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: var(--font-body);
+    color: var(--gray-800);
+    background: var(--white);
+  }
+  .story-sentence-text:focus { outline: none; border-color: var(--pink-dark); box-shadow: 0 0 0 3px var(--pink-light); }
+  .story-chip {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .story-chip:hover { background: var(--pink-mid); border-color: var(--pink); }
+  .story-chips-label { font-size: 12px; color: var(--gray-400); font-weight: 600; margin-bottom: 6px; }
+  .story-final-box {
+    background: var(--pink-dark);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    display: none;
+  }
+  .story-final-box.show { display: block; }
+  .story-final-title { font-family: var(--font-head); font-weight: 900; font-size: 16px; color: var(--white); margin-bottom: 0.75rem; }
+  .story-final-text { font-size: 17px; color: var(--pink-light); line-height: 2; }
+  .story-speak-btn { display: none; }
+
+  /* ── CLOSING (Section 4) ── */
+  .closing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 1.5rem; }
+  .closing-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--pink-mid);
+    padding: 1.25rem;
+    text-align: center;
+    transition: transform 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+  .closing-card:hover { transform: translateY(-3px); border-color: var(--pink); }
+  .closing-card.done { background: var(--pink-light); border-color: var(--pink-dark); }
+  .closing-icon { font-size: 38px; margin-bottom: 8px; }
+  .closing-en { font-family: var(--font-head); font-weight: 800; font-size: 17px; color: var(--gray-800); margin-bottom: 3px; }
+  .closing-hint { font-size: 12px; color: var(--gray-400); }
+  .closing-check { display: none; font-size: 20px; margin-top: 6px; }
+  .closing-card.done .closing-check { display: block; }
+  .star-board {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--yellow-mid);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .star-board-title { font-family: var(--font-head); font-weight: 900; font-size: 18px; color: var(--yellow-dark); margin-bottom: 0.5rem; }
+  .star-board-sub { font-size: 13px; color: var(--gray-400); margin-bottom: 1rem; }
+  .star-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .star-slot { font-size: 32px; cursor: pointer; transition: transform 0.15s; }
+  .star-slot:hover { transform: scale(1.2); }
+  .star-earned { font-size: 14px; font-weight: 700; color: var(--yellow-dark); }
+  .congrats-box {
+    background: var(--pink-dark);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    text-align: center;
+    color: var(--white);
+  }
+  .congrats-emoji { font-size: 56px; margin-bottom: 0.75rem; }
+  .congrats-title { font-family: var(--font-head); font-weight: 900; font-size: 22px; margin-bottom: 0.5rem; }
+  .congrats-text { font-size: 14px; opacity: 0.85; line-height: 1.7; margin-bottom: 1.25rem; }
+  .next-phrase { background: rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: 0.75rem 1.25rem; font-family: var(--font-head); font-weight: 800; font-size: 18px; }
+
+  /* ── SHARED BUTTONS ── */
+  .btn {
+    padding: 9px 20px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--pink-mid);
+    background: var(--white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .btn:hover { background: var(--pink-light); border-color: var(--pink); }
+  .btn-pink {
+    background: var(--pink-dark);
+    color: var(--white);
+    border-color: var(--pink-dark);
+    font-family: var(--font-head);
+    font-weight: 800;
+  }
+  .btn-pink:hover { background: #9d174d; }
+  .btn-yellow {
+    background: var(--yellow);
+    color: var(--yellow-dark);
+    border-color: var(--yellow);
+    font-family: var(--font-head);
+    font-weight: 800;
+  }
+  .btn-yellow:hover { background: #f59e0b; }
+
+  /* ── CONFETTI ── */
+  .confetti-piece {
+    position: fixed;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    animation: fall linear forwards;
+    z-index: 9999;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  @media (max-width: 520px) {
+    /* Layout */
+    .section { padding: 1rem 0.875rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+
+    /* Nav */
+    .topbar { padding: 0 0.5rem; }
+    .topbar-logo { font-size: 14px; margin-right: 0.75rem; }
+    .nav-btn { padding: 0.75rem 0.6rem; font-size: 11px; gap: 3px; }
+    .nav-btn .nav-icon { font-size: 14px; }
+
+    /* Hero */
+    .hero-card { padding: 1.5rem 1rem; }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 14px; }
+    .phrase-box { font-size: 17px; padding: 0.875rem 1rem; }
+    .intro-cards { grid-template-columns: 1fr 1fr; }
+
+    /* This or That */
+    .section-title { font-size: 20px; }
+    .tot-cards { gap: 10px; }
+    .tot-emoji { font-size: 38px; }
+    .tot-word { font-size: 15px; }
+    .score-strip { gap: 1rem; padding: 0.6rem 1rem; }
+    .score-player-num { font-size: 22px; }
+    .pick-btn { padding: 7px 12px; font-size: 12px; }
+    .tot-btn-row { gap: 6px; }
+
+    /* Passport */
+    .passport-body { padding: 1rem; gap: 1rem; }
+    .avatar-circle { width: 60px; height: 60px; font-size: 28px; }
+    .avatar-grid { grid-template-columns: repeat(5, 1fr); }
+    .emoji-row { gap: 6px; padding: 0.6rem; }
+    .emoji-opt { font-size: 20px; padding: 4px 6px; }
+    .sticker { font-size: 20px; padding: 4px 6px; }
+    .passport-actions { flex-direction: column; }
+    .passport-actions .btn { width: 100%; text-align: center; }
+
+    /* Story */
+    .story-builder-head { padding: 1rem; }
+    .story-body { padding: 1rem; }
+    .story-sentence-row { gap: 6px; }
+    .story-sentence-text { font-size: 14px; padding: 8px 10px; }
+    .story-chip { font-size: 11px; padding: 3px 8px; }
+    .story-final-box { padding: 1rem; }
+    .story-final-text { font-size: 15px; }
+
+    /* Closing */
+    .closing-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .closing-card { padding: 1rem 0.75rem; }
+    .closing-icon { font-size: 28px; }
+    .closing-en { font-size: 13px; }
+    .closing-hint { font-size: 11px; }
+    .star-slot { font-size: 26px; }
+    .congrats-box { padding: 1.5rem 1rem; }
+    .congrats-title { font-size: 18px; }
+
+    /* Buttons */
+    .btn { font-size: 13px; padding: 9px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topbar">
+  <div class="topbar-logo">⭐ Class 1</div>
+  <button class="nav-btn active" onclick="goTo(0)" id="nav0"><span class="nav-icon">👋</span> Hello!</button>
+  <button class="nav-btn" onclick="goTo(1)" id="nav1"><span class="nav-icon">🎮</span> This or That</button>
+  <button class="nav-btn" onclick="goTo(2)" id="nav2"><span class="nav-icon">🌟</span> My Passport</button>
+  <button class="nav-btn" onclick="goTo(3)" id="nav3"><span class="nav-icon">📖</span> My Story</button>
+  <button class="nav-btn" onclick="goTo(4)" id="nav4"><span class="nav-icon">🎊</span> See You!</button>
+</nav>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:10%"></div></div>
+
+<!-- SECTION 0: HELLO -->
+<section class="section active" id="sec0">
+  <div class="hero-card">
+    <div class="hero-stars">🌸 🌟 🦋 🌸</div>
+    <div class="hero-title">Hello, <span>Gabriela!</span></div>
+    <div class="hero-subtitle">Welcome to your very first English class!<br>Today we play, we laugh, and we learn together.</div>
+
+    <div class="teacher-intro">
+      <h3>👩‍🏫 About your teacher</h3>
+    </div>
+
+    <div class="phrase-box">"My name is ___."<small>Point to yourself and smile!</small></div>
+    <div class="phrase-box">"I love ___."<small>Show something you love on camera.</small></div>
+    <div class="phrase-box">"My favorite color is ___."<small>Show something that color!</small></div>
+
+    <div style="margin:1.5rem 0 1rem;">
+      <div style="font-family:var(--font-head);font-weight:800;font-size:15px;color:var(--gray-800);margin-bottom:0.75rem;">Now it's your turn! Answer these:</div>
+      <div class="intro-cards">
+        <div class="intro-card"><div class="intro-card-icon">😊</div><div class="intro-card-label">What's your name?</div></div>
+        <div class="intro-card"><div class="intro-card-icon">🎂</div><div class="intro-card-label">How old are you?</div></div>
+        <div class="intro-card"><div class="intro-card-icon">❤️</div><div class="intro-card-label">What do you love?</div></div>
+        <div class="intro-card"><div class="intro-card-icon">🎨</div><div class="intro-card-label">Favorite color?</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <button class="btn btn-pink" onclick="goTo(1)" style="font-size:16px;padding:12px 32px;">Let's play! 🎮</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: THIS OR THAT -->
+<section class="section" id="sec1">
+  <div class="section-title">🎮 This or That?</div>
+  <div class="section-desc">Pick your favorite!</div>
+
+  <div class="score-strip">
+    <div class="score-player">
+      <div class="score-player-name">Gabriela</div>
+      <div class="score-player-num" id="tot-score-g">0</div>
+    </div>
+    <div class="score-divider">🤝</div>
+    <div class="score-player">
+      <div class="score-player-name">matches</div>
+      <div class="score-player-num" id="tot-matches">0</div>
+    </div>
+    <div class="score-divider">🤝</div>
+    <div class="score-player">
+      <div class="score-player-name">Teacher</div>
+      <div class="score-player-num" id="tot-score-t">0</div>
+    </div>
+  </div>
+
+  <div id="tot-game">
+    <div class="round-label" id="tot-round">Round 1 of 8</div>
+    <div class="question-label" id="tot-question"></div>
+    <div class="tot-cards" id="tot-cards"></div>
+    <div class="legend-strip" style="margin-bottom:1rem;">
+      <span><span class="legend-dot" style="background:#ec4899;"></span>Gabriela</span>
+      <span><span class="legend-dot" style="background:#FBBF24;"></span>Teacher</span>
+      <span><span class="legend-dot" style="background:#8b5cf6;"></span>Both!</span>
+    </div>
+    <div class="tot-btn-row" id="tot-btns"></div>
+    <div style="text-align:center;"><button class="pick-btn-next" id="tot-next" onclick="totNext()">Next round ➜</button></div>
+  </div>
+
+  <div class="tot-result" id="tot-result">
+    <div class="result-big" id="res-emoji"></div>
+    <div class="result-title" id="res-title"></div>
+    <div class="result-sub" id="res-sub"></div>
+    <div class="result-badge" id="res-badge"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn" onclick="totRestart()">Play again 🔄</button>
+      <button class="btn btn-pink" onclick="goTo(2)">My Passport 🌟</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: PASSPORT -->
+<section class="section" id="sec2">
+  <div class="section-title">🌟 My English Passport</div>
+  <div class="section-desc">Fill in your passport in English!</div>
+
+  <div class="passport-wrap">
+    <div class="passport-header">
+      <div class="passport-icon-circle">🌟</div>
+      <div>
+        <div class="passport-htitle">My English Passport</div>
+        <div class="passport-hsub">My first words in English — Class 1</div>
+      </div>
+    </div>
+
+    <div class="passport-body">
+      <div class="avatar-pick-row">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="avatar-circle" id="pp-avatar" onclick="toggleAvatarGrid()" title="Choose avatar">🦋</div>
+          <div class="avatar-hint">tap to pick</div>
+        </div>
+        <div style="flex:1;">
+          <div class="avatar-grid" id="pp-avatar-grid">
+            <div class="avatar-opt" onclick="setAvatar('🦋')">🦋</div>
+            <div class="avatar-opt" onclick="setAvatar('🌸')">🌸</div>
+            <div class="avatar-opt" onclick="setAvatar('🐱')">🐱</div>
+            <div class="avatar-opt" onclick="setAvatar('🐶')">🐶</div>
+            <div class="avatar-opt" onclick="setAvatar('🦄')">🦄</div>
+            <div class="avatar-opt" onclick="setAvatar('🐰')">🐰</div>
+            <div class="avatar-opt" onclick="setAvatar('🐸')">🐸</div>
+            <div class="avatar-opt" onclick="setAvatar('🐼')">🐼</div>
+            <div class="avatar-opt" onclick="setAvatar('🦊')">🦊</div>
+            <div class="avatar-opt" onclick="setAvatar('🐨')">🐨</div>
+            <div class="avatar-opt" onclick="setAvatar('🌈')">🌈</div>
+            <div class="avatar-opt" onclick="setAvatar('⭐')">⭐</div>
+          </div>
+          <div style="margin-top:8px;">
+            <div class="field-label">My name is...</div>
+            <input class="field-input" id="pp-name" type="text" placeholder="Gabriela" oninput="ppUpdate()">
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div><div class="field-label">I am ... years old</div><input class="field-input" id="pp-age" type="number" min="1" max="18" placeholder="8" oninput="ppUpdate()"></div>
+        <div><div class="field-label">I am from...</div><input class="field-input" id="pp-from" type="text" placeholder="Colombia" oninput="ppUpdate()"></div>
+      </div>
+
+      <div>
+        <div class="field-label">My favorite color is...</div>
+        <div class="emoji-row" id="pp-color-row">
+          <span class="emoji-opt" onclick="ppPick('color',this,'Red 🔴','Red')">🔴</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Pink 🩷','Pink')">🩷</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Orange 🟠','Orange')">🟠</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Yellow 🟡','Yellow')">🟡</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Green 🟢','Green')">🟢</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Blue 🔵','Blue')">🔵</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Purple 🟣','Purple')">🟣</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'White ⬜','White')">⬜</span>
+          <span class="emoji-opt" onclick="ppPick('color',this,'Black ⬛','Black')">⬛</span>
+        </div>
+        <div class="pick-display" id="pp-color-disp"></div>
+      </div>
+
+      <div>
+        <div class="field-label">My favorite animal is...</div>
+        <div class="emoji-row">
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a cat 🐱','a cat')">🐱</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a dog 🐶','a dog')">🐶</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a bunny 🐰','a bunny')">🐰</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a bear 🐻','a bear')">🐻</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a dolphin 🐬','a dolphin')">🐬</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a butterfly 🦋','a butterfly')">🦋</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a panda 🐼','a panda')">🐼</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a unicorn 🦄','a unicorn')">🦄</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a penguin 🐧','a penguin')">🐧</span>
+          <span class="emoji-opt" onclick="ppPick('animal',this,'a fox 🦊','a fox')">🦊</span>
+        </div>
+        <div class="pick-display" id="pp-animal-disp"></div>
+      </div>
+
+      <div>
+        <div class="field-label">My favorite food is...</div>
+        <div class="emoji-row">
+          <span class="emoji-opt" onclick="ppPick('food',this,'pizza 🍕','pizza')">🍕</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'ice cream 🍦','ice cream')">🍦</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'strawberries 🍓','strawberries')">🍓</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'bananas 🍌','bananas')">🍌</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'pasta 🍝','pasta')">🍝</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'tacos 🌮','tacos')">🌮</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'cookies 🍪','cookies')">🍪</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'watermelon 🍉','watermelon')">🍉</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'chocolate 🍫','chocolate')">🍫</span>
+          <span class="emoji-opt" onclick="ppPick('food',this,'mangoes 🥭','mangoes')">🥭</span>
+        </div>
+        <div class="pick-display" id="pp-food-disp"></div>
+      </div>
+
+      <div class="grid-2">
+        <div><div class="field-label">I love...</div><input class="field-input" id="pp-love" type="text" placeholder="drawing, music..." oninput="ppUpdate()"></div>
+        <div><div class="field-label">I don't like...</div><input class="field-input" id="pp-dislike" type="text" placeholder="spiders, rain..." oninput="ppUpdate()"></div>
+      </div>
+
+      <div>
+        <div class="field-label">Add to my story ✏️</div>
+        <div style="display:flex;flex-direction:column;gap:8px;" id="pp-extra-sents">
+          <input class="field-input" id="pp-pet" type="text" placeholder='I have a pet. / I don&apos;t have a pet.' oninput="ppUpdate()">
+          <input class="field-input" id="pp-subject" type="text" placeholder="My favorite subject is ___." oninput="ppUpdate()">
+          <input class="field-input" id="pp-friend" type="text" placeholder="My best friend is ___." oninput="ppUpdate()">
+          <input class="field-input" id="pp-can" type="text" placeholder="I can ___." oninput="ppUpdate()">
+        </div>
+      </div>
+
+      <div>
+        <div class="field-label">My stickers today 🎉</div>
+        <div class="sticker-row">
+          <span class="sticker" onclick="toggleSticker(this)">⭐</span>
+          <span class="sticker" onclick="toggleSticker(this)">🌟</span>
+          <span class="sticker" onclick="toggleSticker(this)">🎉</span>
+          <span class="sticker" onclick="toggleSticker(this)">🏆</span>
+          <span class="sticker" onclick="toggleSticker(this)">❤️</span>
+          <span class="sticker" onclick="toggleSticker(this)">🦋</span>
+          <span class="sticker" onclick="toggleSticker(this)">🌈</span>
+          <span class="sticker" onclick="toggleSticker(this)">🎨</span>
+          <span class="sticker" onclick="toggleSticker(this)">🎵</span>
+          <span class="sticker" onclick="toggleSticker(this)">🌸</span>
+          <span class="sticker" onclick="toggleSticker(this)">🍓</span>
+          <span class="sticker" onclick="toggleSticker(this)">🦄</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="story-preview">
+      <div class="story-preview-label">📖 My story in English</div>
+      <div class="story-preview-text" id="pp-story-preview"><span class="story-empty">Fill in the fields above...</span></div>
+    </div>
+
+    <div class="passport-actions">
+      <button class="btn" onclick="ppClear()">Clear ✕</button>
+      <button class="btn" onclick="resetAll()" style="color:var(--gray-400);">New class 🔄</button>
+      <button class="btn btn-yellow" onclick="sendPassportToStory()">Build my story ➜</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: MY STORY -->
+<section class="section" id="sec3">
+  <div class="section-title">📖 My Story</div>
+  <div class="section-desc">Pick the sentences you want. Then read your story out loud!</div>
+
+  <div class="story-builder-wrap">
+    <div class="story-builder-head">
+      <div class="story-head-icon">📖</div>
+      <div>
+        <div class="story-head-title">Gabriela's Story</div>
+        <div class="story-head-sub" id="story-count-label">0 / 6 sentences</div>
+      </div>
+    </div>
+    <div class="story-body">
+
+      <div id="story-sentences" style="min-height:48px;"></div>
+
+      <div style="margin-top:1rem;">
+        <div class="story-chips-label">Choose a sentence to add:</div>
+        <div id="story-chips">
+          <span class="story-chip" onclick="addChip('My name is ___.') ">My name is ___.</span>
+          <span class="story-chip" onclick="addChip('I am ___ years old.')">I am ___ years old.</span>
+          <span class="story-chip" onclick="addChip('I am from ___.')">I am from ___.</span>
+          <span class="story-chip" onclick="addChip('My favorite color is ___.')">My favorite color is ___.</span>
+          <span class="story-chip" onclick="addChip('My favorite animal is ___.')">My favorite animal is ___.</span>
+          <span class="story-chip" onclick="addChip('My favorite food is ___.')">My favorite food is ___.</span>
+          <span class="story-chip" onclick="addChip('I love ___.')">I love ___.</span>
+          <span class="story-chip" onclick="addChip(&quot;I don't like ___.&quot;)">I don't like ___.</span>
+          <span class="story-chip" onclick="addChip('I have a pet.')">I have a pet.</span>
+          <span class="story-chip" onclick="addChip(&quot;I don't have a pet.&quot;)">I don't have a pet.</span>
+          <span class="story-chip" onclick="addChip('My favorite subject is ___.')">My favorite subject is ___.</span>
+          <span class="story-chip" onclick="addChip('I like Math.')">I like Math.</span>
+          <span class="story-chip" onclick="addChip('I like Science.')">I like Science.</span>
+          <span class="story-chip" onclick="addChip('I like Art.')">I like Art.</span>
+          <span class="story-chip" onclick="addChip('I like PE.')">I like PE.</span>
+          <span class="story-chip" onclick="addChip('My best friend is ___.')">My best friend is ___.</span>
+          <span class="story-chip" onclick="addChip('I can ___.')">I can ___.</span>
+          <span class="story-chip" onclick="addChip('I am happy today.')">I am happy today.</span>
+          <span class="story-chip" onclick="addChip('I want to learn English.')">I want to learn English.</span>
+        </div>
+        <div id="story-limit-msg" style="display:none;font-size:12px;color:var(--pink-dark);font-weight:700;margin-top:6px;">⭐ 6 sentences — great story!</div>
+      </div>
+
+      <div class="story-final-box" id="story-final-box">
+        <div class="story-final-title">⭐ Gabriela's story — read it out loud!</div>
+        <div class="story-final-text" id="story-final-text"></div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1.5rem;">
+        <button class="btn btn-pink" onclick="buildFinalStory()" style="font-size:15px;padding:11px 28px;">Read my story! 🌟</button>
+        <button class="btn" onclick="storyClear()">Clear ✕</button>
+        <button class="btn" onclick="goTo(4)">See you! 🎊</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: SEE YOU -->
+<section class="section" id="sec4">
+  <div class="section-title">🎊 See You Next Time!</div>
+  <div class="section-desc">Say each phrase out loud. Tap it when you're done!</div>
+
+  <div class="closing-grid">
+    <div class="closing-card" onclick="markDone(this)">
+      <div class="closing-icon">👋</div>
+      <div class="closing-en">Goodbye!</div>
+      <div class="closing-hint">Say it with a big wave!</div>
+      <div class="closing-check">✅</div>
+    </div>
+    <div class="closing-card" onclick="markDone(this)">
+      <div class="closing-icon">🙏</div>
+      <div class="closing-en">Thank you!</div>
+      <div class="closing-hint">For the class today.</div>
+      <div class="closing-check">✅</div>
+    </div>
+    <div class="closing-card" onclick="markDone(this)">
+      <div class="closing-icon">🎉</div>
+      <div class="closing-en">It was fun!</div>
+      <div class="closing-hint">Did you have fun?</div>
+      <div class="closing-check">✅</div>
+    </div>
+    <div class="closing-card" onclick="markDone(this)">
+      <div class="closing-icon">📅</div>
+      <div class="closing-en">See you next time!</div>
+      <div class="closing-hint">We'll play again!</div>
+      <div class="closing-check">✅</div>
+    </div>
+    <div class="closing-card" onclick="markDone(this)">
+      <div class="closing-icon">💪</div>
+      <div class="closing-en">I did great today!</div>
+      <div class="closing-hint">Because you really did!</div>
+      <div class="closing-check">✅</div>
+    </div>
+    <div class="closing-card" onclick="markDone(this)">
+      <div class="closing-icon">❤️</div>
+      <div class="closing-en">I love English!</div>
+      <div class="closing-hint">The first of many times.</div>
+      <div class="closing-check">✅</div>
+    </div>
+  </div>
+
+  <div class="star-board">
+    <div class="star-board-title">⭐ Stars earned today</div>
+    <div class="star-board-sub">Tap a star for each thing Gabriela did well!</div>
+    <div class="star-row" id="star-row">
+      <span class="star-slot" onclick="addStar(this)" title="Played This or That">🤍</span>
+      <span class="star-slot" onclick="addStar(this)" title="Filled her passport">🤍</span>
+      <span class="star-slot" onclick="addStar(this)" title="Read her story">🤍</span>
+      <span class="star-slot" onclick="addStar(this)" title="Said goodbye in English">🤍</span>
+      <span class="star-slot" onclick="addStar(this)" title="Spoke English all class">🤍</span>
+    </div>
+    <div class="star-earned" id="star-earned">0 / 5 stars</div>
+  </div>
+
+  <div class="congrats-box">
+    <div class="congrats-emoji">🎊</div>
+    <div class="congrats-title">Amazing work, Gabriela!</div>
+    <div class="congrats-text">You completed your very first English class!</div>
+    <div style="margin-top:1.25rem;">
+      <button onclick="downloadSummary()" style="padding:11px 28px;border-radius:var(--radius-md);border:none;background:var(--yellow);color:var(--yellow-dark);font-family:var(--font-head);font-weight:800;font-size:16px;cursor:pointer;">📥 Download summary</button>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── NAVIGATION ──
+const TOTAL = 5;
+function goTo(i) {
+  document.querySelectorAll('.section').forEach((s,idx) => s.classList.toggle('active', idx===i));
+  document.querySelectorAll('.nav-btn').forEach((b,idx) => b.classList.toggle('active', idx===i));
+  document.getElementById('progress-fill').style.width = ((i+1)/TOTAL*100) + '%';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── THIS OR THAT ──
+const totQs = [
+  {q:'Dogs or cats?', opts:[{e:'🐶',w:'Dogs'},{e:'🐱',w:'Cats'}]},
+  {q:'Pizza or ice cream?', opts:[{e:'🍕',w:'Pizza'},{e:'🍦',w:'Ice cream'}]},
+  {q:'Beach or mountains?', opts:[{e:'🌊',w:'Beach'},{e:'⛰️',w:'Mountains'}]},
+  {q:'Drawing or music?', opts:[{e:'🎨',w:'Drawing'},{e:'🎵',w:'Music'}]},
+  {q:'Morning or night?', opts:[{e:'☀️',w:'Morning'},{e:'🌙',w:'Night'}]},
+  {q:'Books or games?', opts:[{e:'📚',w:'Books'},{e:'🎮',w:'Games'}]},
+  {q:'Butterflies or flowers?', opts:[{e:'🦋',w:'Butterflies'},{e:'🌸',w:'Flowers'}]},
+  {q:'Chocolate or strawberries?', opts:[{e:'🍫',w:'Chocolate'},{e:'🍓',w:'Strawberries'}]},
+  {q:'Math or Science?', opts:[{e:'🔢',w:'Math'},{e:'🔬',w:'Science'}]},
+  {q:'Art or PE?', opts:[{e:'🖌️',w:'Art'},{e:'⚽',w:'PE'}]},
+  {q:'Spanish or English?', opts:[{e:'🇨🇴',w:'Spanish'},{e:'🇬🇧',w:'English'}]},
+  {q:'Reading or Writing?', opts:[{e:'📖',w:'Reading'},{e:'✏️',w:'Writing'}]},
+];
+let totCur=0, totPicks={g:null,t:null}, totMatches=0;
+
+function totRender() {
+  const q = totQs[totCur];
+  document.getElementById('tot-round').textContent = 'Round '+(totCur+1)+' of '+totQs.length;
+  document.getElementById('tot-question').textContent = q.q;
+  totPicks = {g:null,t:null};
+  const c = document.getElementById('tot-cards');
+  c.innerHTML = '';
+  q.opts.forEach((opt,i) => {
+    const d = document.createElement('div');
+    d.className = 'tot-card';
+    d.id = 'tot-c'+i;
+    d.innerHTML = '<div class="tot-emoji">'+opt.e+'</div><div class="tot-word">'+opt.w+'</div>';
+    c.appendChild(d);
+  });
+  const btns = document.getElementById('tot-btns');
+  btns.innerHTML = '';
+  ['g','t'].forEach(who => {
+    [0,1].forEach(i => {
+      const b = document.createElement('button');
+      b.className = 'pick-btn';
+      b.id = 'totb-'+who+i;
+      b.textContent = (who==='g'?'Gabriela: ':'Teacher: ') + q.opts[i].w;
+      b.onclick = () => totPick(who,i);
+      btns.appendChild(b);
+    });
+  });
+  document.getElementById('tot-next').style.display = 'none';
+}
+
+function totPick(who, idx) {
+  totPicks[who] = idx;
+  totUpdateCards();
+  ['g','t'].forEach(w => [0,1].forEach(i => {
+    const b = document.getElementById('totb-'+w+i);
+    if(b) b.classList.toggle('faded', totPicks[w]!==null && totPicks[w]!==i);
+  }));
+  if(totPicks.g!==null && totPicks.t!==null) {
+    if(totPicks.g===totPicks.t) totMatches++;
+    document.getElementById('tot-matches').textContent = totMatches;
+    document.getElementById('tot-next').style.display = 'inline-block';
+  }
+}
+
+function totUpdateCards() {
+  totQs[totCur].opts.forEach((_,i) => {
+    const card = document.getElementById('tot-c'+i);
+    card.className = 'tot-card';
+    card.querySelectorAll('.tot-badge').forEach(b=>b.remove());
+    const gP = totPicks.g===i, tP = totPicks.t===i;
+    if(gP && tP) {
+      card.classList.add('sel-both');
+      const b=document.createElement('div'); b.className='tot-badge badge-both'; b.textContent='🤝 Both!'; card.appendChild(b);
+    } else if(gP) {
+      card.classList.add('sel-g');
+      const b=document.createElement('div'); b.className='tot-badge badge-g'; b.textContent='⭐ Gabriela'; card.appendChild(b);
+    } else if(tP) {
+      card.classList.add('sel-t');
+      const b=document.createElement('div'); b.className='tot-badge badge-t'; b.textContent='✏️ Teacher'; card.appendChild(b);
+    }
+  });
+}
+
+function totNext() {
+  if(totCur < totQs.length-1) { totCur++; totRender(); }
+  else { totShowResult(); }
+}
+
+function totShowResult() {
+  document.getElementById('tot-game').style.display='none';
+  const r = document.getElementById('tot-result');
+  r.classList.add('show');
+  const pct = Math.round(totMatches/totQs.length*100);
+  let em,ti,su;
+  if(totMatches>=7){em='🌟';ti='Amazing match!';su='You two think exactly alike!'}
+  else if(totMatches>=5){em='🎉';ti='Great connection!';su='So much in common!'}
+  else if(totMatches>=3){em='😊';ti='Cool mix!';su='Different tastes make great chats!'}
+  else{em='🦄';ti='Totally unique!';su='Opposites make the best friends!'}
+  document.getElementById('res-emoji').textContent=em;
+  document.getElementById('res-title').textContent=ti;
+  document.getElementById('res-sub').textContent=su;
+  document.getElementById('res-badge').textContent=totMatches+' / '+totQs.length+' matches — '+pct+'%';
+  launchConfetti();
+}
+
+function totRestart() {
+  totCur=0; totMatches=0;
+  document.getElementById('tot-score-g').textContent='0';
+  document.getElementById('tot-score-t').textContent='0';
+  document.getElementById('tot-matches').textContent='0';
+  document.getElementById('tot-game').style.display='block';
+  document.getElementById('tot-result').classList.remove('show');
+  totRender();
+}
+
+totRender();
+
+// ── PASSPORT ──
+const ppState = { color:'', colorLabel:'', animal:'', animalLabel:'', food:'', foodLabel:'' };
+
+function toggleAvatarGrid() {
+  const g = document.getElementById('pp-avatar-grid');
+  g.style.display = g.style.display==='none'||g.style.display==='' ? 'grid' : 'none';
+}
+
+function setAvatar(em) {
+  document.getElementById('pp-avatar').textContent=em;
+  document.querySelectorAll('#pp-avatar-grid .avatar-opt').forEach(o=>o.classList.toggle('sel', o.textContent===em));
+  document.getElementById('pp-avatar-grid').style.display='none';
+  ppUpdate();
+}
+
+function ppPick(field, el, label, value) {
+  el.closest('.emoji-row').querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  ppState[field]=value;
+  ppState[field+'Label']=label;
+  document.getElementById('pp-'+field+'-disp').textContent='→ '+label;
+  ppUpdate();
+}
+
+function toggleSticker(el) { el.classList.toggle('sel'); ppUpdate(); }
+
+function ppUpdate() {
+  const name=document.getElementById('pp-name').value.trim();
+  const age=document.getElementById('pp-age').value.trim();
+  const from=document.getElementById('pp-from').value.trim();
+  const love=document.getElementById('pp-love').value.trim();
+  const dislike=document.getElementById('pp-dislike').value.trim();
+  const pet=document.getElementById('pp-pet').value.trim();
+  const subject=document.getElementById('pp-subject').value.trim();
+  const friend=document.getElementById('pp-friend').value.trim();
+  const can=document.getElementById('pp-can').value.trim();
+  const stickers=[...document.querySelectorAll('.sticker.sel')].map(s=>s.textContent).join(' ');
+  const sents=[];
+  if(name) sents.push('My name is '+name+'.');
+  if(age) sents.push('I am '+age+' years old.');
+  if(from) sents.push('I am from '+from+'.');
+  if(ppState.colorLabel) sents.push('My favorite color is '+ppState.color+'.');
+  if(ppState.animalLabel) sents.push('My favorite animal is '+ppState.animal+'.');
+  if(ppState.foodLabel) sents.push('My favorite food is '+ppState.food+'.');
+  if(love) sents.push('I love '+love+'.');
+  if(dislike) sents.push("I don't like "+dislike+'.');
+  if(pet) sents.push(pet);
+  if(subject) sents.push(subject);
+  if(friend) sents.push(friend);
+  if(can) sents.push(can);
+  if(stickers) sents.push(stickers);
+  const box=document.getElementById('pp-story-preview');
+  box.innerHTML = sents.length ? sents.map(s=>'<div class="story-sentence">'+s+'</div>').join('') : '<span class="story-empty">Fill in the fields above...</span>';
+}
+
+function ppClear() {
+  ['pp-name','pp-age','pp-from','pp-love','pp-dislike','pp-pet','pp-subject','pp-friend','pp-can'].forEach(id=>document.getElementById(id).value='');
+  Object.keys(ppState).forEach(k=>ppState[k]='');
+  ['color','animal','food'].forEach(f=>document.getElementById('pp-'+f+'-disp').textContent='');
+  document.querySelectorAll('.emoji-opt,.sticker').forEach(o=>o.classList.remove('sel'));
+  document.getElementById('pp-avatar').textContent='🦋';
+  ppUpdate();
+}
+
+function sendPassportToStory() {
+  buildStorySection([]);
+  goTo(3);
+}
+
+// ── STORY ──
+let storySents = [];
+const MAX_SENTS = 6;
+
+function updateStoryCounter() {
+  const label = document.getElementById('story-count-label');
+  const limitMsg = document.getElementById('story-limit-msg');
+  const chips = document.getElementById('story-chips');
+  if(label) label.textContent = storySents.length + ' / ' + MAX_SENTS + ' sentences';
+  if(limitMsg) limitMsg.style.display = storySents.length >= MAX_SENTS ? 'block' : 'none';
+  if(chips) chips.style.opacity = storySents.length >= MAX_SENTS ? '0.4' : '1';
+}
+
+function buildStorySection(sents) {
+  storySents = sents.length ? [...sents] : [];
+  renderStorySents();
+  const box = document.getElementById('story-final-box');
+  if(box) box.classList.remove('show');
+  updateStoryCounter();
+}
+
+function renderStorySents() {
+  const box = document.getElementById('story-sentences');
+  if(!box) return;
+  box.innerHTML = '';
+  storySents.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'story-sentence-row';
+    const delBtn = `<button onclick="removeSent(${i})" style="width:26px;height:26px;border-radius:50%;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--pink-dark);font-size:14px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1;">✕</button>`;
+    row.innerHTML = '<div class="story-num">' + (i + 1) + '</div><input class="story-sentence-text" value="' + s.replace(/"/g, '&quot;') + '" oninput="storySents[' + i + ']=this.value;saveAll();">' + delBtn;
+    box.appendChild(row);
+  });
+  updateStoryCounter();
+}
+
+function removeSent(i) {
+  storySents.splice(i, 1);
+  renderStorySents();
+  document.getElementById('story-final-box').classList.remove('show');
+  saveAll();
+}
+
+function addChip(text) {
+  if(storySents.length >= MAX_SENTS) return;
+  storySents.push(text);
+  renderStorySents();
+  document.getElementById('story-final-box').classList.remove('show');
+  saveAll();
+}
+
+function storyClear() {
+  storySents = [];
+  renderStorySents();
+  document.getElementById('story-final-box').classList.remove('show');
+  saveAll();
+}
+
+function buildFinalStory() {
+  const box=document.getElementById('story-final-box');
+  const txt=document.getElementById('story-final-text');
+  txt.innerHTML=storySents.map(s=>'<div style="padding:2px 0;">'+s+'</div>').join('');
+  box.classList.add('show');
+  launchConfetti();
+}
+
+// ── CLOSING ──
+function markDone(el) {
+  el.classList.toggle('done');
+}
+
+let starCount=0;
+function addStar(el) {
+  if(el.textContent==='🤍') { el.textContent='⭐'; starCount++; }
+  else { el.textContent='🤍'; starCount--; }
+  starCount=Math.max(0,Math.min(5,starCount));
+  document.getElementById('star-earned').textContent=starCount+' / 5 stars';
+  if(starCount>=3) launchConfetti();
+}
+
+
+function launchConfetti() {
+  const colors=['#F472B6','#FBBF24','#34D399','#60A5FA','#A78BFA','#FB7185'];
+  for(let i=0;i<48;i++) {
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText='left:'+Math.random()*100+'vw;top:-10px;background:'+colors[Math.floor(Math.random()*colors.length)]+';width:'+(6+Math.random()*8)+'px;height:'+(6+Math.random()*8)+'px;animation-duration:'+(1.5+Math.random()*2)+'s;animation-delay:'+Math.random()*0.5+'s;border-radius:'+Math.random()*6+'px;';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 3500);
+  }
+}
+
+// ── GLOBAL ACTIVITY LOG ──
+const actLog = {
+  tot:     [],
+  totMatches: 0,
+  passport: {},
+  story:   [],
+  closing: {phrases:[], stars:0},
+};
+
+// ── AUTO-SAVE / LOAD ──
+const SAVE_KEY = 'gabriela_class1';
+
+function saveAll() {
+  actLog.passport = {
+    name:    document.getElementById('pp-name').value,
+    age:     document.getElementById('pp-age').value,
+    from:    document.getElementById('pp-from').value,
+    love:    document.getElementById('pp-love').value,
+    dislike: document.getElementById('pp-dislike').value,
+    pet:     document.getElementById('pp-pet').value,
+    subject: document.getElementById('pp-subject').value,
+    friend:  document.getElementById('pp-friend').value,
+    can:     document.getElementById('pp-can').value,
+    avatar:  document.getElementById('pp-avatar').textContent,
+    color: ppState.color, colorLabel: ppState.colorLabel,
+    animal: ppState.animal, animalLabel: ppState.animalLabel,
+    food: ppState.food, foodLabel: ppState.foodLabel,
+    stickers: [...document.querySelectorAll('.sticker.sel')].map(s=>s.textContent),
+  };
+  actLog.story = storySents;
+  actLog.totMatches = totMatches;
+  actLog.closing.stars = starCount;
+  actLog.closing.phrases = [...document.querySelectorAll('.closing-card.done .closing-en')].map(el=>el.textContent);
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(actLog)); } catch(e) {}
+}
+
+// Patch totPick to log each round answer
+const _origTotNext = totNext;
+window.totNext = function() {
+  if(totPicks.g!==null && totPicks.t!==null) {
+    const q = totQs[totCur];
+    actLog.tot[totCur] = {
+      q: q.q,
+      gChoice: q.opts[totPicks.g].w,
+      tChoice: q.opts[totPicks.t].w,
+      gEmoji:  q.opts[totPicks.g].e,
+      tEmoji:  q.opts[totPicks.t].e,
+      match: totPicks.g === totPicks.t,
+    };
+    saveAll();
+  }
+  _origTotNext();
+};
+
+// Auto-save on passport inputs
+document.querySelectorAll('#sec2 input').forEach(el => el.addEventListener('input', saveAll));
+
+// Patch passport pickers
+const _origPpPick = ppPick;
+window.ppPick = function(f,el,label,value) { _origPpPick(f,el,label,value); saveAll(); };
+const _origToggleSticker = toggleSticker;
+window.toggleSticker = function(el) { _origToggleSticker(el); saveAll(); };
+
+// Patch closing
+const _origMarkDone = markDone;
+window.markDone = function(el) { _origMarkDone(el); saveAll(); };
+const _origAddStar = addStar;
+window.addStar = function(el) { _origAddStar(el); saveAll(); };
+
+function loadAll() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem(SAVE_KEY)); } catch(e) {}
+  if(!data) return;
+
+  const pp = data.passport || {};
+  ['name','age','from','love','dislike','pet','subject','friend','can'].forEach(f => {
+    if(pp[f]) document.getElementById('pp-'+f).value = pp[f];
+  });
+  if(pp.avatar) document.getElementById('pp-avatar').textContent = pp.avatar;
+  if(pp.colorLabel) { ppState.color=pp.color; ppState.colorLabel=pp.colorLabel; document.getElementById('pp-color-disp').textContent='→ '+pp.colorLabel; }
+  if(pp.animalLabel) { ppState.animal=pp.animal; ppState.animalLabel=pp.animalLabel; document.getElementById('pp-animal-disp').textContent='→ '+pp.animalLabel; }
+  if(pp.foodLabel) { ppState.food=pp.food; ppState.foodLabel=pp.foodLabel; document.getElementById('pp-food-disp').textContent='→ '+pp.foodLabel; }
+  if(pp.stickers) document.querySelectorAll('.sticker').forEach(s=>{ if(pp.stickers.includes(s.textContent)) s.classList.add('sel'); });
+  if(data.tot) actLog.tot = data.tot;
+  if(data.totMatches) { totMatches=data.totMatches; actLog.totMatches=data.totMatches; }
+  ppUpdate();
+}
+
+function resetAll() {
+  if(!confirm('Start a new class? This will clear all saved data.')) return;
+  try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
+  location.reload();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadAll();
+  // My Story always starts with 3 example sentences, never from storage
+  buildStorySection([
+    'My name is ___.',
+    'I am ___ years old.',
+    'I love ___.',
+  ]);
+});
+
+// ── DOWNLOAD FULL SUMMARY ──
+function downloadSummary() {
+  saveAll();
+  const pp      = actLog.passport;
+  const name    = (pp.name || 'Gabriela').trim();
+  const avatar  = pp.avatar || '🌟';
+  const stickers = (pp.stickers||[]).join(' ');
+  const today   = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+  // This or That rows
+  const totRows = actLog.tot.map(r => `
+    <tr>
+      <td style="padding:6px 10px;font-size:14px;color:#4B5563;">${r.q}</td>
+      <td style="padding:6px 10px;text-align:center;font-size:15px;">${r.gEmoji||''} ${r.gChoice}</td>
+      <td style="padding:6px 10px;text-align:center;font-size:15px;">${r.tEmoji||''} ${r.tChoice}</td>
+      <td style="padding:6px 10px;text-align:center;font-size:18px;">${r.match?'🤝':''}</td>
+    </tr>`).join('');
+
+  // Passport info items
+  const ppItems = [
+    pp.age     ? `<div class="info-item"><div class="info-label">Age</div><div class="info-value">${pp.age} years old</div></div>` : '',
+    pp.from    ? `<div class="info-item"><div class="info-label">From</div><div class="info-value">${pp.from}</div></div>` : '',
+    pp.colorLabel  ? `<div class="info-item"><div class="info-label">Favorite color</div><div class="info-value">${pp.colorLabel}</div></div>` : '',
+    pp.animalLabel ? `<div class="info-item"><div class="info-label">Favorite animal</div><div class="info-value">${pp.animalLabel}</div></div>` : '',
+    pp.foodLabel   ? `<div class="info-item"><div class="info-label">Favorite food</div><div class="info-value">${pp.foodLabel}</div></div>` : '',
+    pp.love    ? `<div class="info-item"><div class="info-label">I love</div><div class="info-value">${pp.love}</div></div>` : '',
+    pp.dislike ? `<div class="info-item"><div class="info-label">I don't like</div><div class="info-value">${pp.dislike}</div></div>` : '',
+    pp.pet     ? `<div class="info-item"><div class="info-label">Pet</div><div class="info-value">${pp.pet}</div></div>` : '',
+    pp.subject ? `<div class="info-item"><div class="info-label">Favorite subject</div><div class="info-value">${pp.subject}</div></div>` : '',
+    pp.friend  ? `<div class="info-item"><div class="info-label">Best friend</div><div class="info-value">${pp.friend}</div></div>` : '',
+    pp.can     ? `<div class="info-item"><div class="info-label">I can</div><div class="info-value">${pp.can}</div></div>` : '',
+  ].filter(Boolean).join('');
+
+  // Story sentences
+  const storyLines = (actLog.story||[]).map((s,i)=>`
+    <div class="s-line"><span class="s-num">${i+1}</span><span>${s}</span></div>`).join('');
+
+  // Closing phrases
+  const closingPhrases = (actLog.closing.phrases||[]).map(p=>`<span class="phrase-chip">✅ ${p}</span>`).join('');
+
+  // Stars
+  const starsEarned = actLog.closing.stars || 0;
+  const starsDisplay = '⭐'.repeat(starsEarned) + '🤍'.repeat(Math.max(0,5-starsEarned));
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${name} — Class 1 Full Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito Sans',sans-serif;background:#FFF8FC;color:#1F2937;padding:2rem 1rem;max-width:640px;margin:0 auto}
+h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:#BE185D;margin-bottom:0.75rem}
+.card{background:#fff;border-radius:20px;border:2px solid #FBCFE8;overflow:hidden;margin-bottom:1.25rem}
+.card-head{background:#BE185D;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:14px}
+.avatar{width:54px;height:54px;border-radius:50%;background:#FCE7F3;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.head-title{color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:20px}
+.head-sub{color:#fbb6d0;font-size:12px;margin-top:2px}
+.card-body{padding:1.25rem 1.5rem}
+.section-card{background:#fff;border-radius:20px;border:2px solid #FBCFE8;overflow:hidden;margin-bottom:1.25rem}
+.section-head{background:#FCE7F3;padding:0.75rem 1.25rem;display:flex;align-items:center;gap:8px}
+.section-icon{font-size:20px}
+.section-title-text{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:#BE185D}
+.section-body{padding:1.25rem}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.info-item{background:#FFF8FC;border-radius:10px;border:1.5px solid #FBCFE8;padding:0.6rem 0.9rem}
+.info-label{font-size:10px;font-weight:700;color:#BE185D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+.info-value{font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:#1F2937}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:#FFF8FC;padding:6px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9CA3AF;border-bottom:2px solid #FBCFE8}
+td{border-bottom:1px solid #FCE7F3;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.match-badge{display:inline-block;background:#FBCFE8;color:#BE185D;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700}
+.story-box{background:#FEF9C3;border-radius:14px;border:1.5px solid #FDE68A;padding:1.1rem}
+.s-line{display:flex;align-items:baseline;gap:9px;padding:5px 0;font-size:14px;line-height:1.5;border-bottom:1px solid #FDE68A}
+.s-line:last-child{border-bottom:none}
+.s-num{width:20px;height:20px;border-radius:50%;background:#FBCFE8;color:#BE185D;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Nunito',sans-serif}
+.phrase-chip{display:inline-block;background:#FCE7F3;color:#BE185D;border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;margin:3px}
+.mem-stat{display:inline-block;background:#FFF8FC;border:1.5px solid #FBCFE8;border-radius:12px;padding:0.5rem 1rem;margin-right:10px;text-align:center}
+.mem-stat-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;color:#BE185D}
+.mem-stat-label{font-size:10px;font-weight:700;text-transform:uppercase;color:#9CA3AF;letter-spacing:0.5px}
+.stickers{font-size:22px;margin-top:0.75rem;letter-spacing:4px}
+.stars{font-size:26px;letter-spacing:4px;margin:0.5rem 0}
+.congrats{text-align:center;background:#BE185D;border-radius:20px;padding:1.5rem;color:#fff;margin-bottom:1.25rem}
+.congrats-emoji{font-size:48px;margin-bottom:0.5rem}
+.congrats-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;margin-bottom:0.25rem}
+.congrats-sub{font-size:13px;opacity:0.85}
+.empty{color:#9CA3AF;font-style:italic;font-size:13px}
+@media print{body{background:#fff;padding:0}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="card">
+  <div class="card-head">
+    <div class="avatar">${avatar}</div>
+    <div>
+      <div class="head-title">${name}'s Class 1</div>
+      <div class="head-sub">Full summary · ${today}</div>
+    </div>
+  </div>
+</div>
+
+<!-- THIS OR THAT -->
+<div class="section-card">
+  <div class="section-head"><span class="section-icon">🎮</span><span class="section-title-text">This or That — ${actLog.totMatches} matches</span></div>
+  <div class="section-body">
+    ${totRows ? `<table>
+      <tr><th>Question</th><th style="text-align:center">${name}</th><th style="text-align:center">Teacher</th><th style="text-align:center">Match</th></tr>
+      ${totRows}
+    </table>` : `<p class="empty">Not played yet.</p>`}
+  </div>
+</div>
+
+<!-- PASSPORT -->
+<div class="section-card">
+  <div class="section-head"><span class="section-icon">🌟</span><span class="section-title-text">My English Passport</span></div>
+  <div class="section-body">
+    ${ppItems ? `<div class="info-grid">${ppItems}</div>` : `<p class="empty">Passport not filled yet.</p>`}
+    ${stickers ? `<div class="stickers">${stickers}</div>` : ''}
+  </div>
+</div>
+
+<!-- MY STORY -->
+<div class="section-card">
+  <div class="section-head"><span class="section-icon">📖</span><span class="section-title-text">My Story in English</span></div>
+  <div class="section-body">
+    ${storyLines ? `<div class="story-box">${storyLines}</div>` : `<p class="empty">Story not written yet.</p>`}
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="section-card">
+  <div class="section-head"><span class="section-icon">🎊</span><span class="section-title-text">See You — Closing phrases</span></div>
+  <div class="section-body">
+    ${closingPhrases || `<p class="empty">No phrases marked yet.</p>`}
+    <div class="stars">${starsDisplay}</div>
+    <div style="font-size:12px;color:#9CA3AF;margin-top:4px;">${starsEarned} / 5 stars earned today</div>
+  </div>
+</div>
+
+<!-- CONGRATS -->
+<div class="congrats">
+  <div class="congrats-emoji">🏆</div>
+  <div class="congrats-title">Amazing work, ${name}!</div>
+  <div class="congrats-sub">You completed your very first English class. See you next time! ⭐</div>
+</div>
+
+</body>
+</html>`;
+
+  const blob = new Blob([html], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name.toLowerCase().replace(/\s+/g,'-') + '-class1-summary.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
