@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaby's Quiz Show</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-1:#8ECAE6; --sky-2:#FFB703; /* morning */
+    --ink:#1D1A39; --card:#FFFFFF;
+    --coral:#FF6B6B; --grass:#06D6A0; --violet:#6A4C93; --gold:#FFD166;
+    --shadow: 0 10px 30px rgba(29,26,57,0.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(180deg,var(--sky-1),var(--sky-2));
+    transition:background 1.2s ease;
+    overflow-x:hidden;
+    padding:20px;
+  }
+  .stage{
+    width:100%; max-width:640px;
+    position:relative;
+  }
+  .skyline{
+    position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  }
+  .celestial{
+    position:absolute; width:90px; height:90px; border-radius:50%;
+    top:8%; left:-100px;
+    background:radial-gradient(circle at 35% 35%, #FFF6D9, var(--gold) 70%);
+    box-shadow:0 0 60px 20px rgba(255,209,102,0.55);
+    transition: left 1.4s ease, top 1.4s ease, background 1.2s ease, box-shadow 1.2s ease;
+  }
+  .stars{position:absolute; inset:0; opacity:0; transition:opacity 1.2s ease;}
+  .stars span{position:absolute; width:3px; height:3px; background:#fff; border-radius:50%; opacity:.8;}
+
+  .card{
+    background:var(--card); border-radius:28px; box-shadow:var(--shadow);
+    padding:28px 24px; position:relative;
+  }
+  h1,h2,h3{font-family:'Fredoka',sans-serif; margin:0;}
+  .title{font-size:1.6rem; color:var(--ink); text-align:center;}
+  .subtitle{text-align:center; color:#6b6b8a; font-weight:700; margin-top:6px;}
+
+  .top-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .badge{
+    font-family:'Fredoka',sans-serif; background:var(--violet); color:#fff;
+    padding:6px 14px; border-radius:999px; font-size:.9rem; font-weight:600;
+  }
+  .score{
+    font-family:'Fredoka',sans-serif; background:var(--grass); color:#fff;
+    padding:6px 14px; border-radius:999px; font-weight:600; font-size:.9rem;
+    display:flex; align-items:center; gap:6px;
+  }
+  .progress-wrap{height:10px; background:#eee; border-radius:999px; overflow:hidden; margin:14px 0 22px;}
+  .progress-bar{height:100%; background:linear-gradient(90deg,var(--coral),var(--gold)); width:0%; transition:width .5s ease;}
+
+  .round-instructions{
+    text-align:center; color:var(--ink); font-weight:700; margin-bottom:18px; font-size:1.05rem;
+  }
+
+  .prompt-box{
+    text-align:center; margin:10px 0 22px;
+  }
+  .clock-emoji{font-size:3.2rem; display:block; margin-bottom:8px;}
+  .prompt-text{font-family:'Fredoka',sans-serif; font-size:1.35rem; color:var(--ink); line-height:1.3;}
+  .prompt-sub{color:#8a8aa3; font-weight:700; margin-top:4px; font-size:.95rem;}
+
+  .options{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
+  }
+  .options.tf{grid-template-columns:1fr 1fr;}
+  .opt-btn{
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:1.05rem;
+    border:none; border-radius:18px; padding:18px 10px; cursor:pointer;
+    background:#F4F1FB; color:var(--ink); box-shadow:0 4px 0 #d9d5ee;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .opt-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9d5ee;}
+  .opt-btn.emoji-opt{font-size:2.4rem; padding:20px 10px;}
+  .opt-btn.correct{background:var(--grass); color:#fff; box-shadow:0 4px 0 #05a582;}
+  .opt-btn.wrong{background:var(--coral); color:#fff; box-shadow:0 4px 0 #d94b4b;}
+  .opt-btn:disabled{cursor:default;}
+
+  .feedback{
+    text-align:center; margin-top:16px; font-family:'Fredoka',sans-serif;
+    font-size:1.15rem; min-height:1.6rem; color:var(--ink);
+  }
+  .say-it{
+    text-align:center; margin-top:16px; background:var(--gold); border-radius:16px; padding:14px;
+    font-family:'Fredoka',sans-serif; color:var(--ink); font-size:1.1rem;
+  }
+  .primary-btn{
+    display:block; margin:20px auto 0; font-family:'Fredoka',sans-serif; font-weight:600;
+    background:var(--violet); color:#fff; border:none; border-radius:999px;
+    padding:14px 30px; font-size:1.05rem; cursor:pointer; box-shadow:0 5px 0 #4a3468;
+  }
+  .primary-btn:active{transform:translateY(4px); box-shadow:0 1px 0 #4a3468;}
+
+  .boss-wrap{margin:6px 0 20px; text-align:center;}
+  .boss{font-size:4rem; display:inline-block; transition:transform .3s ease;}
+  .boss-bar-wrap{height:16px; background:#3a3567; border-radius:999px; overflow:hidden; margin-top:10px; max-width:320px; margin-left:auto; margin-right:auto;}
+  .boss-bar{height:100%; width:100%; background:linear-gradient(90deg,#F72585,#FF6B6B); transition:width .5s ease;}
+
+  .landing, .round-intro, .final{text-align:center;}
+  .round-list{list-style:none; padding:0; margin:20px 0; display:flex; flex-direction:column; gap:10px;}
+  .round-list li{
+    background:#F4F1FB; border-radius:16px; padding:12px 16px; text-align:left;
+    display:flex; align-items:center; gap:12px; font-weight:700; color:var(--ink);
+  }
+  .round-list .n{font-family:'Fredoka',sans-serif; background:var(--violet); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0;}
+  .round-emoji{font-size:1.6rem;}
+
+  .trophy{font-size:5rem; margin:10px 0;}
+  .final-score{font-family:'Fredoka',sans-serif; font-size:2.2rem; color:var(--violet); margin:6px 0;}
+  .final-msg{font-weight:700; color:var(--ink); font-size:1.1rem; margin-bottom:6px;}
+
+  .confetti{position:fixed; top:-20px; z-index:5; border-radius:2px; pointer-events:none;}
+
+  @media (max-width:420px){
+    .prompt-text{font-size:1.15rem;}
+    .opt-btn{font-size:.95rem; padding:14px 8px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="skyline">
+  <div class="celestial" id="celestial"></div>
+  <div class="stars" id="stars"></div>
+</div>
+
+<div class="stage">
+  <div class="card" id="card"></div>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+
+const ROUNDS = [
+  {
+    key:"vocab", title:"Vocabulary", emoji:"🌿", theme:"morning",
+    instructions:"Tap the emoji that matches the routine. Then say the word out loud!",
+    type:"emoji-tap",
+    questions:[
+      {prompt:"HAVE BREAKFAST", options:["🥞","🛁","📚","🏫"], correct:0, say:"have breakfast"},
+      {prompt:"TAKE A SHOWER", options:["🍪","🚿","🛌","🎒"], correct:1, say:"take a shower"},
+      {prompt:"GO TO SCHOOL", options:["🏫","🍽️","⏰","🧦"], correct:0, say:"go to school"},
+      {prompt:"DO HOMEWORK", options:["🍝","📝","🛏️","🚿"], correct:1, say:"do homework"},
+      {prompt:"GO TO BED", options:["🛌","🥪","🏠","⏰"], correct:0, say:"go to bed"},
+      {prompt:"HAVE A SNACK", options:["🍪","👕","📚","🚿"], correct:0, say:"have a snack"}
+    ]
+  },
+  {
+    key:"verbforms", title:"Verb forms", emoji:"⚡", theme:"midday",
+    instructions:"Choose the correct verb: I, She, or He?",
+    type:"mcq",
+    questions:[
+      {prompt:"I ___ breakfast every morning.", options:["have","has"], correct:0},
+      {prompt:"She ___ her homework at 5 o'clock.", options:["do","does"], correct:1},
+      {prompt:"He ___ to school at 8 o'clock.", options:["go","goes"], correct:1},
+      {prompt:"I ___ dressed very fast!", options:["get","gets"], correct:0},
+      {prompt:"She ___ a shower at night.", options:["take","takes"], correct:1},
+      {prompt:"He ___ home at 4 o'clock.", options:["get","gets"], correct:1}
+    ]
+  },
+  {
+    key:"time1p", title:"1st person + time", emoji:"🔄", theme:"golden",
+    instructions:"Look at the clock and complete the sentence!",
+    type:"clock",
+    questions:[
+      {clock:"🕖", prompt:"I wake up at ___.", options:["seven o'clock","two o'clock"], correct:0},
+      {clock:"🕗", prompt:"I go to school at ___.", options:["five o'clock","eight o'clock"], correct:1},
+      {clock:"🕛", prompt:"I have lunch at ___.", options:["twelve o'clock","six o'clock"], correct:0},
+      {clock:"🕓", prompt:"I get home at ___.", options:["four o'clock","nine o'clock"], correct:0},
+      {clock:"🕘", prompt:"I go to bed at ___.", options:["one o'clock","nine o'clock"], correct:1}
+    ]
+  },
+  {
+    key:"third", title:"3rd person", emoji:"📰", theme:"dusk",
+    instructions:"Change 'I' into 'She' or 'He'!",
+    type:"mcq",
+    questions:[
+      {prompt:"I do my homework. → He ___", options:["does his homework","do his homework"], correct:0},
+      {prompt:"I have a snack. → She ___", options:["have a snack","has a snack"], correct:1},
+      {prompt:"I get dressed. → He ___", options:["gets dressed","get dressed"], correct:0},
+      {prompt:"I go to bed. → She ___", options:["goes to bed","go to bed"], correct:0},
+      {prompt:"I have dinner. → He ___", options:["have dinner","has dinner"], correct:1},
+      {prompt:"I take a bath. → She ___", options:["take a bath","takes a bath"], correct:1}
+    ]
+  },
+  {
+    key:"boss", title:"Final Boss", emoji:"🏆", theme:"night",
+    instructions:"True or False? Beat the Boss with every correct answer!",
+    type:"tf",
+    questions:[
+      {prompt:"She have breakfast at seven o'clock.", correct:false},
+      {prompt:"He goes to school at nine o'clock.", correct:true},
+      {prompt:"I gets dressed every morning.", correct:false},
+      {prompt:"She takes a shower at night.", correct:true},
+      {prompt:"He get home at four o'clock.", correct:false},
+      {prompt:"I have lunch at midnight.", correct:false}
+    ]
+  }
+];
+
+const THEMES = {
+  morning:{sky1:"#8ECAE6", sky2:"#FFB703", celTop:"8%", celLeft:"15%", celBg:"radial-gradient(circle at 35% 35%, #FFF6D9, #FFD166 70%)", stars:0},
+  midday:{sky1:"#4DB6E5", sky2:"#FFE066", celTop:"6%", celLeft:"50%", celBg:"radial-gradient(circle at 35% 35%, #FFFDE7, #FFB703 70%)", stars:0},
+  golden:{sky1:"#FF9E6D", sky2:"#FFD166", celTop:"14%", celLeft:"75%", celBg:"radial-gradient(circle at 35% 35%, #FFF3D6, #FF9E1B 70%)", stars:0},
+  dusk:{sky1:"#4A3F6B", sky2:"#B15C8E", celTop:"22%", celLeft:"85%", celBg:"radial-gradient(circle at 35% 35%, #FFE3E3, #FF6B6B 70%)", stars:0.3},
+  night:{sky1:"#0D0B2B", sky2:"#1D1A39", celTop:"10%", celLeft:"70%", celBg:"radial-gradient(circle at 35% 35%, #F4F1FB, #D9D5EE 70%)", stars:1}
+};
+
+const POINTS_FULL = 10, POINTS_RETRY = 5;
+
+/* ---------------- STATE ---------------- */
+let state = { screen:"landing", roundIdx:0, qIdx:0, score:0, attempted:false, bossHits:0 };
+
+/* ---------------- HELPERS ---------------- */
+function applyTheme(themeKey){
+  const t = THEMES[themeKey];
+  document.body.style.background = `linear-gradient(180deg, ${t.sky1}, ${t.sky2})`;
+  const cel = document.getElementById("celestial");
+  cel.style.top = t.celTop; cel.style.left = t.celLeft; cel.style.background = t.celBg;
+  const stars = document.getElementById("stars");
+  stars.style.opacity = t.stars;
+}
+
+function buildStars(){
+  const wrap = document.getElementById("stars");
+  let html = "";
+  for(let i=0;i<40;i++){
+    const top = Math.random()*70, left = Math.random()*100, delay = Math.random()*2;
+    html += `<span style="top:${top}%;left:${left}%;animation:twinkle 2s ${delay}s infinite alternate;"></span>`;
+  }
+  wrap.innerHTML = html;
+  const style = document.createElement("style");
+  style.textContent = "@keyframes twinkle{from{opacity:.2}to{opacity:1}}";
+  document.head.appendChild(style);
+}
+
+function launchConfetti(n=60){
+  const colors = ["#FF6B6B","#FFD166","#06D6A0","#6A4C93","#4DB6E5"];
+  for(let i=0;i<n;i++){
+    const el = document.createElement("div");
+    el.className = "confetti";
+    const size = 6+Math.random()*6;
+    el.style.width = size+"px"; el.style.height = (size*0.4)+"px";
+    el.style.left = Math.random()*100+"vw";
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(el);
+    const duration = 2200+Math.random()*1500;
+    el.animate([
+      {transform:`translateY(0) rotate(0deg)`, opacity:1},
+      {transform:`translateY(100vh) rotate(${360+Math.random()*360}deg)`, opacity:0.9}
+    ], {duration, easing:"ease-in"});
+    setTimeout(()=>el.remove(), duration+50);
+  }
+}
+
+// simple tones so tapping feels alive, no external files needed
+function beep(freqStart, freqEnd, dur=0.18){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    osc.type = "sine"; osc.frequency.setValueAtTime(freqStart, ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(freqEnd, ctx.currentTime+dur);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+dur);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime+dur);
+  }catch(e){}
+}
+
+const totalQuestions = ROUNDS.reduce((s,r)=>s+r.questions.length,0);
+const maxScore = totalQuestions * POINTS_FULL;
+
+/* ---------------- RENDER ---------------- */
+function render(){
+  const card = document.getElementById("card");
+
+  if(state.screen === "landing"){
+    applyTheme("morning");
+    card.innerHTML = `
+      <div class="landing">
+        <h1 class="title">🎬 Gaby's Quiz Show 🎬</h1>
+        <p class="subtitle">Daily Routines Edition</p>
+        <ul class="round-list">
+          ${ROUNDS.map((r,i)=>`<li><span class="n">${i+1}</span><span class="round-emoji">${r.emoji}</span> ${r.title}</li>`).join("")}
+        </ul>
+        <button class="primary-btn" onclick="startGame()">▶️ Start the show!</button>
+      </div>`;
+    return;
+  }
+
+  if(state.screen === "roundintro"){
+    const r = ROUNDS[state.roundIdx];
+    applyTheme(r.theme);
+    if(r.theme==="dusk"||r.theme==="night") buildStars();
+    card.innerHTML = `
+      <div class="round-intro">
+        <div style="font-size:3.4rem;">${r.emoji}</div>
+        <h2 class="title">Round ${state.roundIdx+1}: ${r.title}</h2>
+        <p class="round-instructions">${r.instructions}</p>
+        <button class="primary-btn" onclick="beginQuestions()">Let's go! 🚀</button>
+      </div>`;
+    return;
+  }
+
+  if(state.screen === "question"){
+    renderQuestion();
+    return;
+  }
+
+  if(state.screen === "roundend"){
+    const r = ROUNDS[state.roundIdx];
+    applyTheme(r.theme);
+    card.innerHTML = `
+      <div class="round-intro">
+        <div style="font-size:3rem;">🎉</div>
+        <h2 class="title">Round complete!</h2>
+        <p class="round-instructions">Score so far: ${state.score} / ${maxScore} pts</p>
+        <button class="primary-btn" onclick="nextRound()">${state.roundIdx+1 < ROUNDS.length ? "Next round ▶️" : "See final results 🏁"}</button>
+      </div>`;
+    launchConfetti(30);
+    return;
+  }
+
+  if(state.screen === "final"){
+    applyTheme("night"); buildStars();
+    const pct = state.score/maxScore;
+    let trophy = "🥉", msg = "Great effort, Gaby! Keep practicing!";
+    if(pct >= 0.85){ trophy="🥇"; msg="AMAZING! You are an English superstar!"; }
+    else if(pct >= 0.6){ trophy="🥈"; msg="Great job! You know your routines really well!"; }
+    card.innerHTML = `
+      <div class="final">
+        <div class="trophy">${trophy}</div>
+        <h2 class="title">Game Over!</h2>
+        <div class="final-score">${state.score} / ${maxScore} pts</div>
+        <p class="final-msg">${msg}</p>
+        <button class="primary-btn" onclick="restartGame()">🔁 Play again</button>
+      </div>`;
+    launchConfetti(90);
+    return;
+  }
+}
+
+function progressBarHTML(){
+  const r = ROUNDS[state.roundIdx];
+  const pct = ((state.qIdx)/r.questions.length)*100;
+  return `<div class="progress-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>`;
+}
+
+function renderQuestion(){
+  const r = ROUNDS[state.roundIdx];
+  const q = r.questions[state.qIdx];
+  applyTheme(r.theme);
+  if(r.theme==="dusk"||r.theme==="night") buildStars();
+  const card = document.getElementById("card");
+
+  let optionsHTML = "";
+  if(r.type === "emoji-tap"){
+    optionsHTML = `<div class="options">${q.options.map((opt,i)=>
+      `<button class="opt-btn emoji-opt" onclick="answer(${i})">${opt}</button>`).join("")}</div>`;
+  } else if(r.type === "tf"){
+    optionsHTML = `<div class="options tf">
+      <button class="opt-btn" onclick="answer(true)">✅ True</button>
+      <button class="opt-btn" onclick="answer(false)">❌ False</button>
+    </div>`;
+  } else {
+    optionsHTML = `<div class="options">${q.options.map((opt,i)=>
+      `<button class="opt-btn" onclick="answer(${i})">${opt}</button>`).join("")}</div>`;
+  }
+
+  let bossHTML = "";
+  if(r.type === "tf"){
+    const bossPct = 100 - (state.bossHits/r.questions.length*100);
+    bossHTML = `<div class="boss-wrap">
+      <span class="boss" id="bossface">👹</span>
+      <div class="boss-bar-wrap"><div class="boss-bar" id="bossbar" style="width:${bossPct}%"></div></div>
+    </div>`;
+  }
+
+  const promptTop = r.type === "clock" ? `<span class="clock-emoji">${q.clock}</span>` : "";
+  const promptSub = r.type === "emoji-tap" ? `<div class="prompt-sub">Which emoji matches?</div>` : "";
+
+  card.innerHTML = `
+    <div class="top-row">
+      <span class="badge">${r.emoji} ${r.title}</span>
+      <span class="score">⭐ ${state.score} pts</span>
+    </div>
+    ${progressBarHTML()}
+    ${bossHTML}
+    <div class="prompt-box">
+      ${promptTop}
+      <div class="prompt-text">${q.prompt}</div>
+      ${promptSub}
+    </div>
+    ${optionsHTML}
+    <div class="feedback" id="feedback"></div>
+    <div id="sayit"></div>
+  `;
+}
+
+/* ---------------- LOGIC ---------------- */
+function startGame(){
+  state = {screen:"roundintro", roundIdx:0, qIdx:0, score:0, attempted:false, bossHits:0};
+  render();
+}
+function beginQuestions(){
+  state.screen = "question"; state.qIdx = 0; state.attempted = false;
+  render();
+}
+function nextRound(){
+  if(state.roundIdx+1 < ROUNDS.length){
+    state.roundIdx += 1; state.qIdx = 0; state.attempted = false; state.bossHits = 0;
+    state.screen = "roundintro";
+  } else {
+    state.screen = "final";
+  }
+  render();
+}
+function restartGame(){
+  state = {screen:"landing", roundIdx:0, qIdx:0, score:0, attempted:false, bossHits:0};
+  render();
+}
+
+function answer(chosen){
+  const r = ROUNDS[state.roundIdx];
+  const q = r.questions[state.qIdx];
+  const buttons = document.querySelectorAll(".opt-btn");
+  const feedback = document.getElementById("feedback");
+
+  let isCorrect;
+  if(r.type === "tf"){ isCorrect = (chosen === q.correct); }
+  else { isCorrect = (chosen === q.correct); }
+
+  buttons.forEach(b=>b.disabled = true);
+
+  if(isCorrect){
+    beep(440,880);
+    // highlight correct button
+    if(r.type === "tf"){
+      buttons[chosen === true ? 0 : 1].classList.add("correct");
+      state.bossHits += 1;
+      const bar = document.getElementById("bossbar");
+      if(bar){ bar.style.width = (100 - (state.bossHits/r.questions.length*100)) + "%"; }
+      const boss = document.getElementById("bossface");
+      if(boss){ boss.style.transform = "scale(0.85)"; }
+    } else {
+      buttons[chosen].classList.add("correct");
+    }
+    const pts = state.attempted ? POINTS_RETRY : POINTS_FULL;
+    state.score += pts;
+    feedback.textContent = `✅ Correct! +${pts} pts`;
+
+    if(r.type === "emoji-tap"){
+      document.getElementById("sayit").innerHTML =
+        `<div class="say-it">🎤 Now say it out loud: <strong>"${q.say}"</strong></div>
+         <button class="primary-btn" onclick="advance()">She said it! Continue ▶️</button>`;
+    } else {
+      setTimeout(advance, 900);
+    }
+  } else {
+    beep(300,150);
+    if(r.type === "tf"){
+      buttons[chosen===true?0:1].classList.add("wrong");
+    } else {
+      buttons[chosen].classList.add("wrong");
+    }
+    if(!state.attempted){
+      state.attempted = true;
+      feedback.textContent = "❌ Not quite... try again!";
+      setTimeout(()=>{ buttons.forEach(b=>{ b.disabled=false; b.classList.remove("wrong"); }); feedback.textContent=""; }, 900);
+    } else {
+      // reveal correct answer, no more points
+      feedback.textContent = "The correct answer is highlighted. Let's continue!";
+      if(r.type === "tf"){
+        buttons[q.correct===true?0:1].classList.add("correct");
+      } else {
+        buttons[q.correct].classList.add("correct");
+      }
+      setTimeout(advance, 1400);
+    }
+  }
+}
+
+function advance(){
+  const r = ROUNDS[state.roundIdx];
+  state.qIdx += 1;
+  state.attempted = false;
+  if(state.qIdx >= r.questions.length){
+    state.screen = "roundend";
+  }
+  render();
+}
+
+/* ---------------- INIT ---------------- */
+render();
+</script>
+</body>
+</html>
