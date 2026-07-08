@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>At Work! — Gabriela Class 7</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terra:  #9D4E6E;
+  --terra2: #B5607F;
+  --gold:   #C084A0;
+  --gold2:  #F0C4D4;
+  --teal:   #5C7A5E;
+  --teal2:  #A8C5A0;
+  --cream:  #FDF6F9;
+  --warm:   #FCE8F0;
+  --rust:   #F9D6E4;
+  --white:  #FFFFFF;
+  --gray:   #6B7280;
+  --gray2:  #2D1B25;
+  --green:  #10B981;
+  --green2: #D1FAE5;
+  --red:    #EF4444;
+  --red2:   #FEE2E2;
+  --font-head:'Nunito',sans-serif;
+  --font-body:'Nunito Sans',sans-serif;
+  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-xl:32px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--cream);color:var(--gray2);min-height:100vh;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect x='15' y='2' width='5' height='18' rx='2.5' fill='%23F9A8D4'/%3E%3Crect x='14' y='18' width='7' height='8' rx='1' fill='%23EC4899'/%3E%3Cellipse cx='17.5' cy='28' rx='3.5' ry='5' fill='%23BE185D'/%3E%3Cellipse cx='17.5' cy='32' rx='2' ry='1.5' fill='%23FCE7F3'/%3E%3C/svg%3E") 17 36, auto}
+
+/* ── NAV ── */
+.topbar{background:linear-gradient(135deg,#6B2D47,var(--terra));padding:0 1.5rem;
+  display:flex;align-items:center;position:sticky;top:0;z-index:100;
+  overflow-x:auto;scrollbar-width:none;border-bottom:3px solid var(--gold2)}
+.topbar::-webkit-scrollbar{display:none}
+.topbar-logo{font-family:var(--font-head);font-weight:900;font-size:15px;color:var(--gold2);
+  white-space:nowrap;margin-right:1rem;flex-shrink:0}
+.nav-btn{display:flex;align-items:center;gap:4px;padding:0.85rem 0.75rem;border:none;
+  background:transparent;font-family:var(--font-body);font-size:11px;font-weight:700;
+  color:#FED7AA;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-3px;
+  white-space:nowrap;transition:color 0.15s,border-color 0.15s;flex-shrink:0}
+.nav-btn .ni{font-size:13px}
+.nav-btn:hover{color:var(--gold2)}
+.nav-btn.active{color:var(--gold2);border-bottom-color:var(--gold2)}
+.progress-bar-wrap{background:#7C2D12;height:5px}
+.progress-bar-fill{height:5px;background:linear-gradient(90deg,var(--terra2),var(--gold2));transition:width 0.4s}
+
+/* ── SECTIONS ── */
+.section{display:none;padding:2rem 1.5rem;max-width:800px;margin:0 auto;position:relative}
+.section.active{display:block}
+.section-title{font-family:var(--font-head);font-weight:900;font-size:24px;color:var(--terra);margin-bottom:0.25rem}
+.section-desc{font-size:14px;color:var(--gray);margin-bottom:1.5rem;line-height:1.6}
+
+/* ── CARDS ── */
+.card{background:var(--white);border-radius:var(--r-xl);border:2px solid #FED7AA;
+  overflow:hidden;margin-bottom:1.25rem;box-shadow:0 4px 20px rgba(194,65,12,0.08)}
+.card-head{background:linear-gradient(135deg,#6B2D47,var(--terra));
+  padding:1.25rem 1.5rem;display:flex;align-items:center;gap:12px}
+.card-head-icon{font-size:28px}
+.card-head-title{font-family:var(--font-head);font-weight:900;font-size:17px;color:var(--white)}
+.card-head-sub{font-size:12px;color:#FED7AA;margin-top:2px}
+.card-body{padding:1.5rem}
+
+/* ── HERO ── */
+.hero-card{background:var(--white);border-radius:var(--r-xl);border:2px solid #FED7AA;
+  padding:2.5rem 2rem;text-align:center;box-shadow:0 4px 24px rgba(194,65,12,0.1)}
+.hero-tag{display:inline-block;background:var(--rust);color:var(--terra);border-radius:20px;
+  padding:4px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.75rem}
+.hero-title{font-family:var(--font-head);font-weight:900;font-size:clamp(24px,5vw,38px);
+  color:var(--terra);margin-bottom:0.5rem;line-height:1.2}
+.hero-title span{color:var(--gold)}
+.hero-sub{font-size:15px;color:var(--gray);margin-bottom:2rem;line-height:1.6;font-weight:600}
+
+/* ── WARM UP ── */
+.job-guess-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:1rem}
+.job-card{background:var(--rust);border:2px solid #FED7AA;border-radius:var(--r-lg);
+  padding:1rem;text-align:center;cursor:pointer;transition:all 0.15s}
+.job-card:hover{transform:translateY(-2px);border-color:var(--terra)}
+.job-card.revealed{background:var(--warm);border-color:var(--gold)}
+.job-emoji{font-size:36px;margin-bottom:6px}
+.job-action{font-size:12px;color:var(--gray);margin-top:4px;display:none}
+.job-card.revealed .job-action{display:block}
+.job-label{font-family:var(--font-head);font-weight:800;font-size:14px;
+  color:transparent;background:var(--terra);border-radius:4px;padding:2px 8px;transition:all 0.2s}
+.job-card.revealed .job-label{color:var(--terra);background:transparent}
+
+/* ── VIDEO ── */
+.video-wrap{position:relative;padding-bottom:56.25%;border-radius:var(--r-lg);overflow:hidden;
+  border:3px solid #FED7AA;margin-bottom:1rem;background:#000}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.video-note{background:var(--warm);border:1.5px solid var(--gold);border-radius:var(--r-md);
+  padding:0.75rem 1rem;font-size:13px;color:var(--gray2);margin-bottom:1rem;line-height:1.6}
+.comp-q{background:var(--rust);border:1.5px solid #FED7AA;border-radius:var(--r-md);
+  padding:1rem 1.25rem;margin-bottom:8px}
+.comp-q-text{font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--terra);margin-bottom:8px}
+.comp-opts{display:flex;flex-wrap:wrap;gap:8px}
+.comp-opt{padding:6px 14px;border-radius:20px;background:var(--white);
+  border:1.5px solid #FED7AA;font-family:var(--font-head);font-weight:700;font-size:13px;
+  color:var(--terra);cursor:pointer;transition:all 0.15s}
+.comp-opt:hover{background:var(--rust)}
+.comp-opt.correct{background:var(--green);color:var(--white);border-color:var(--green)}
+.comp-opt.wrong{background:var(--red);color:var(--white);border-color:var(--red)}
+.comp-opt.show-ans{background:rgba(16,185,129,0.2);border-color:var(--green);color:var(--green)}
+
+/* ── VOCAB ── */
+.vocab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.vocab-row{background:var(--rust);border:2px solid #FED7AA;border-radius:var(--r-lg);
+  padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.15s}
+.vocab-row:hover{border-color:var(--terra);transform:translateX(2px)}
+.vocab-row.revealed{background:var(--warm);border-color:var(--gold)}
+.vocab-emo{font-size:32px;flex-shrink:0}
+.vocab-info{flex:1}
+.vocab-job{font-family:var(--font-head);font-weight:900;font-size:15px;color:var(--terra)}
+.vocab-verb{font-size:12px;color:var(--gray);margin-top:2px}
+.vocab-sentence{font-size:12px;color:transparent;background:var(--terra);border-radius:4px;
+  padding:1px 8px;margin-top:4px;display:inline-block;font-weight:700;transition:all 0.3s}
+.vocab-row.revealed .vocab-sentence{color:var(--terra);background:transparent}
+
+/* ── GRAMMAR BOX ── */
+.gram-box{background:var(--warm);border:2px solid var(--gold);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1rem}
+.gram-title{font-family:var(--font-head);font-weight:900;font-size:14px;color:var(--gold);
+  text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem}
+.gram-table{width:100%;border-collapse:collapse}
+.gram-table th{background:var(--terra);color:var(--white);padding:8px 12px;
+  font-family:var(--font-head);font-weight:800;font-size:13px;text-align:left}
+.gram-table th:first-child{border-radius:var(--r-sm) 0 0 0}
+.gram-table th:last-child{border-radius:0 var(--r-sm) 0 0}
+.gram-table td{padding:8px 12px;font-size:14px;border-bottom:1px solid #FED7AA}
+.gram-table tr:last-child td{border-bottom:none}
+.gram-table tr:hover td{background:var(--rust)}
+.gram-table td.verb{font-family:var(--font-head);font-weight:800;color:#7C3AED;background:#F5F3FF}
+.gram-table td.verb-s{font-family:var(--font-head);font-weight:800;color:#BE185D;background:#FCE7F3}
+.rule-chip{display:inline-block;background:var(--terra);color:var(--white);
+  border-radius:20px;padding:3px 12px;font-family:var(--font-head);font-weight:800;font-size:12px;margin:3px}
+
+/* ── FILL EXERCISE ── */
+.fill-row{display:flex;align-items:center;gap:8px;background:var(--rust);
+  border:1.5px solid #FED7AA;border-radius:var(--r-md);padding:10px 14px;
+  margin-bottom:8px;flex-wrap:wrap}
+.fill-num{font-family:var(--font-head);font-weight:900;font-size:14px;color:var(--terra);width:22px;flex-shrink:0}
+.fill-text{font-size:14px;color:var(--gray2);flex:1}
+.fill-input{padding:5px 10px;border:2px solid #FED7AA;border-radius:var(--r-sm);
+  font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--gray2);
+  outline:none;width:130px;background:var(--white)}
+.fill-input:focus{border-color:var(--terra)}
+.fill-hint{font-size:11px;color:var(--gray);font-style:italic}
+.fill-fb{font-size:12px;font-weight:700;min-height:16px}
+
+/* ── READING ── */
+.reading-box{background:linear-gradient(135deg,#FEF3C7,#FEF9F0);border:2px solid var(--gold);
+  border-radius:var(--r-xl);padding:1.5rem;margin-bottom:1rem;position:relative}
+.reading-tag{position:absolute;top:-12px;left:1.5rem;background:var(--terra);color:var(--white);
+  border-radius:20px;padding:3px 14px;font-family:var(--font-head);font-weight:800;font-size:12px}
+.reading-title{font-family:var(--font-head);font-weight:900;font-size:20px;color:var(--terra);
+  margin-bottom:0.25rem;margin-top:0.5rem}
+.reading-sub{font-size:12px;color:var(--gray);margin-bottom:1rem;font-style:italic}
+.reading-body{font-size:15px;line-height:2;color:var(--gray2)}
+.reading-body strong{color:var(--terra);font-weight:800}
+.reading-body em{color:var(--teal);font-style:normal;font-weight:700}
+.reading-img{text-align:center;font-size:64px;margin-bottom:0.75rem}
+
+/* ── GUESS WHO ── */
+.clue-box{background:var(--rust);border:2px solid #FED7AA;border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1rem}
+.clue-title{font-family:var(--font-head);font-weight:800;font-size:14px;color:var(--terra);margin-bottom:0.75rem}
+.clue-list{display:flex;flex-direction:column;gap:8px}
+.clue-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray2);
+  background:var(--white);border-radius:var(--r-sm);padding:8px 12px;
+  cursor:pointer;border:1.5px solid #FED7AA;transition:all 0.15s}
+.clue-item:hover{border-color:var(--terra)}
+.clue-item.shown{border-color:var(--gold);background:var(--warm)}
+.clue-num{font-family:var(--font-head);font-weight:900;color:var(--terra);width:20px;flex-shrink:0}
+.clue-text{flex:1}
+.answer-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+.answer-opt{padding:8px 18px;border-radius:20px;background:var(--white);
+  border:2px solid #FED7AA;font-family:var(--font-head);font-weight:700;font-size:14px;
+  color:var(--terra);cursor:pointer;transition:all 0.15s}
+.answer-opt:hover{background:var(--rust);border-color:var(--terra)}
+.answer-opt.correct{background:var(--green);color:var(--white);border-color:var(--green)}
+.answer-opt.wrong{background:var(--red);color:var(--white);border-color:var(--red)}
+
+/* ── MY TURN ── */
+.production-card{background:var(--rust);border:1.5px solid #FED7AA;border-radius:var(--r-lg);
+  padding:1rem 1.25rem;margin-bottom:10px}
+.prod-label{font-size:12px;font-weight:700;color:var(--terra);text-transform:uppercase;
+  letter-spacing:0.5px;margin-bottom:6px}
+.prod-starter{font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--terra);margin-bottom:6px}
+.prod-input{width:100%;padding:8px 12px;border:2px solid #FED7AA;border-radius:var(--r-sm);
+  font-family:var(--font-body);font-size:14px;color:var(--gray2);outline:none;background:var(--white)}
+.prod-input:focus{border-color:var(--terra)}
+.prod-story{display:none;background:var(--warm);border:2px solid var(--gold);
+  border-radius:var(--r-lg);padding:1.25rem;margin-top:1rem}
+.prod-story.show{display:block}
+.prod-story-title{font-family:var(--font-head);font-weight:900;font-size:14px;
+  color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem}
+.prod-line{font-size:15px;padding:5px 0;border-bottom:1px solid #FED7AA;line-height:1.6}
+.prod-line:last-child{border-bottom:none}
+
+/* ── CLOSING ── */
+.closing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-bottom:1.5rem}
+.closing-card{background:var(--white);border-radius:var(--r-lg);border:2px solid #FED7AA;
+  padding:1rem;text-align:center;cursor:pointer;transition:all 0.15s}
+.closing-card:hover{transform:translateY(-2px);border-color:var(--terra)}
+.closing-card.done{background:var(--rust);border-color:var(--terra)}
+.closing-icon{font-size:28px;margin-bottom:6px}
+.closing-en{font-family:var(--font-head);font-weight:800;font-size:13px}
+.closing-check{display:none;font-size:13px;margin-top:4px;color:var(--terra)}
+.closing-card.done .closing-check{display:block}
+.star-board{background:var(--white);border-radius:var(--r-xl);border:2px solid #FED7AA;padding:1.5rem;text-align:center;margin-bottom:1.5rem}
+.star-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0.75rem 0}
+.star-slot{font-size:28px;cursor:pointer;transition:transform 0.15s}
+.star-slot:hover{transform:scale(1.2)}
+.congrats-box{background:linear-gradient(135deg,#6B2D47,var(--terra));border-radius:var(--r-xl);padding:2rem;text-align:center;color:var(--white)}
+.congrats-title{font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--gold2);margin-bottom:0.5rem}
+
+/* ── BUTTONS ── */
+.btn{padding:9px 20px;border-radius:var(--r-md);border:1.5px solid #FED7AA;background:var(--white);
+  font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:all 0.15s}
+.btn:hover{background:var(--rust);border-color:var(--terra);color:var(--terra)}
+.btn-terra{background:linear-gradient(135deg,#6B2D47,var(--terra));color:var(--white);
+  border-color:#7C2D12;font-family:var(--font-head);font-weight:800}
+.btn-terra:hover{opacity:0.9}
+.btn-gold{background:linear-gradient(135deg,#7D3057,var(--gold));color:var(--white);
+  border-color:#B45309;font-family:var(--font-head);font-weight:800}
+.btn-gold:hover{opacity:0.9}
+.btn-teal{background:linear-gradient(135deg,#3D5E3F,var(--teal));color:var(--white);
+  border-color:#0F766E;font-family:var(--font-head);font-weight:800}
+
+/* ── MISC ── */
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+@keyframes sparkle-fade{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0)}}
+.confetti-piece{position:fixed;pointer-events:none;animation:fall linear forwards;z-index:9999}
+.resp-chip{padding:8px 16px;border-radius:20px;background:var(--rust);color:var(--terra);
+  font-family:var(--font-head);font-weight:700;font-size:14px;cursor:pointer;
+  border:2px solid #FED7AA;transition:all 0.15s;display:inline-block;margin:4px}
+.resp-chip:hover{background:#FED7AA}
+.resp-chip.picked{background:var(--terra);color:var(--white);border-color:#7C2D12}
+.warmup-reply{display:none;background:var(--warm);border:1.5px solid var(--gold);
+  border-radius:var(--r-md);padding:0.75rem 1rem;margin-bottom:1rem;
+  font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--terra)}
+
+.job-card,.vocab-row,.comp-opt,.answer-opt,.resp-chip,.clue-item,.star-slot,.closing-card,.btn,.q-opt,.tf-btn{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg transform='rotate(45 20 20)'%3E%3Crect x='18' y='2' width='6' height='20' rx='3' fill='%23FBCFE8'/%3E%3Crect x='17' y='20' width='8' height='7' rx='1.5' fill='%23DB2777'/%3E%3Cpath d='M17 27 Q20 35 23 27 Z' fill='%23BE185D'/%3E%3C/g%3E%3C/svg%3E") 5 35, pointer}
+
+/* ── MATCH ACTIVITY ── */
+.match-col{display:flex;flex-direction:column;gap:8px;}
+.match-chip{padding:10px 14px;background:var(--white);border:2.5px solid var(--rust);
+  border-radius:var(--r-lg);font-family:var(--font-head);font-weight:700;font-size:13px;
+  color:var(--terra);transition:all 0.15s;display:flex;align-items:center;gap:8px;}
+.match-chip:hover{border-color:var(--terra);background:var(--rust);}
+.match-chip.selected{border-color:var(--terra);background:var(--warm);
+  box-shadow:0 0 0 3px rgba(157,78,110,0.25);}
+.match-chip.matched{border-color:var(--green);background:var(--green2);color:#065F46;pointer-events:none;}
+.match-chip.wrong-flash{border-color:var(--red);background:var(--red2);}
+.match-col-label{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;
+  letter-spacing:0.5px;margin-bottom:4px;}
+  .section{padding:1rem 0.875rem}
+  .topbar{padding:0 0.4rem}
+  .nav-btn{padding:0.6rem 0.35rem;font-size:10px}
+  .vocab-grid{grid-template-columns:1fr}
+  .job-guess-grid{grid-template-columns:1fr 1fr}
+  .card-body{padding:1rem}
+  .gram-table td,.gram-table th{padding:6px 8px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-logo">🎨 Class 7</div>
+  <button class="nav-btn active" onclick="goTo(0)" id="nav0"><span class="ni">👋</span> Hello!</button>
+  <button class="nav-btn" onclick="goTo(1)" id="nav1"><span class="ni">💬</span> Let's Talk!</button>
+  <button class="nav-btn" onclick="goTo(2)" id="nav2"><span class="ni">🔍</span> Guess!</button>
+  <button class="nav-btn" onclick="goTo(3)" id="nav3"><span class="ni">🔗</span> Match!</button>
+  <button class="nav-btn" onclick="goTo(4)" id="nav4"><span class="ni">⚡</span> Grammar</button>
+  <button class="nav-btn" onclick="goTo(5)" id="nav5"><span class="ni">📖</span> Reading</button>
+  <button class="nav-btn" onclick="goTo(6)" id="nav6"><span class="ni">🎤</span> Guess Who?</button>
+  <button class="nav-btn" onclick="goTo(7)" id="nav7"><span class="ni">✍️</span> My Turn</button>
+  <button class="nav-btn" onclick="goTo(8)" id="nav8"><span class="ni">🎊</span> See You!</button>
+</nav>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:10%"></div></div>
+
+<!-- SECTION 0: HELLO -->
+<section class="section active" id="sec0">
+  <div class="hero-card">
+    <div class="hero-tag">Class 7 · At Work!</div>
+    <div style="font-size:52px;margin-bottom:0.5rem;">🎨🏗️👩‍⚕️</div>
+    <div class="hero-title">Hello, <span>Gabriela!</span></div>
+    <div class="hero-sub">Today we learn about jobs and the people who do them!</div>
+    <div style="background:linear-gradient(135deg,#6B2D47,var(--terra));border-radius:var(--r-lg);padding:1rem 1.5rem;font-family:var(--font-head);font-weight:800;font-size:20px;color:var(--white);margin-bottom:1rem;">How are you today?</div>
+    <div style="margin-bottom:1.5rem;">
+      <div class="resp-chip" onclick="pickResp(this)">I'm great! 🌟</div>
+      <div class="resp-chip" onclick="pickResp(this)">I'm good! 😊</div>
+      <div class="resp-chip" onclick="pickResp(this)">I'm okay! 🙂</div>
+      <div class="resp-chip" onclick="pickResp(this)">I'm tired! 😴</div>
+      <div class="resp-chip" onclick="pickResp(this)">I'm excited! 🎨</div>
+    </div>
+    <div class="warmup-reply" id="warmup-reply"></div>
+    <button class="btn btn-terra" onclick="goTo(1)" style="font-size:16px;padding:12px 36px;">Let's go! 🏗️</button>
+  </div>
+</section>
+
+<!-- SECTION 1: LET'S TALK -->
+<section class="section" id="sec1">
+  <div class="section-title">💬 Let's Talk!</div>
+  <div class="section-desc">Watch the video together — then let's talk about it!</div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">🎬</div>
+      <div>
+        <div class="card-head-title">Watch the video!</div>
+        <div class="card-head-sub">Your teacher will open it on YouTube.</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="background:var(--warm);border:2px solid var(--gold2);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:48px;flex-shrink:0;">🎬</div>
+        <div>
+          <div style="font-family:var(--font-head);font-weight:900;font-size:16px;color:var(--terra);margin-bottom:4px;">Jobs around the world!</div>
+          <div style="font-size:13px;color:var(--gray2);line-height:1.7;">Watch carefully — what jobs do you see? What do these people do? Can you say it in English?</div>
+        </div>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">After the video — answer these questions!</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;" id="talk-qs"></div>
+      <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-terra" onclick="goTo(2)">Guess! 🔍</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: WARM UP -->
+<section class="section" id="sec2">
+  <div class="section-title">🔍 Guess!</div>
+  <div class="section-desc">You watched the video — now guess each job! Tap to check!</div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">🔍</div>
+      <div>
+        <div class="card-head-title">What's the job?</div>
+        <div class="card-head-sub">Look at the emoji → say "She/He ___s ___" → tap to check!</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="job-guess-grid" id="job-grid"></div>
+      <div style="margin-top:1.25rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn" onclick="buildJobGrid()">Restart 🔄</button>
+        <button class="btn" onclick="revealAllJobs()">Reveal all</button>
+        <button class="btn btn-terra" onclick="goTo(3)">Match! 🔗</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: MATCH -->
+<section class="section" id="sec3">
+  <div class="section-title">🔗 Match!</div>
+  <div class="section-desc">From the video — click a job, then click the action it matches!</div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">🔗</div>
+      <div>
+        <div class="card-head-title">Job → Action</div>
+        <div class="card-head-sub">Click a job → click what they do → see if it matches!</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+        <div>
+          <span style="font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--terra);" id="match-score">0</span>
+          <span style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-left:6px;">/ 7 matched</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn" onclick="buildMatchActivity()">Restart 🔄</button>
+          <button class="btn" onclick="revealAllMatches()">Reveal all</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" id="match-grid"></div>
+      <div style="margin-top:1.25rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-terra" onclick="goTo(4)">Grammar ⚡</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: GRAMMAR -->
+<section class="section" id="sec4">
+  <div class="section-title">⚡ Grammar</div>
+  <div class="section-desc">3rd person — the verb gets an -s! Let's see how it works.</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">📊</div>
+      <div>
+        <div class="card-head-title">She / He + verb + s</div>
+        <div class="card-head-sub">I build → She builds · I grow → He grows</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="gram-box">
+        <div class="gram-title">⚡ The rule</div>
+        <div style="font-size:14px;color:var(--gray2);line-height:1.9;margin-bottom:0.75rem;">
+          With <strong>I</strong> → the verb stays the same<br>
+          With <strong>she / he</strong> → add <span class="rule-chip">-s</span> or <span class="rule-chip">-es</span>
+        </div>
+        <div style="font-size:13px;color:var(--gold);font-weight:600;">
+          Special: <span class="rule-chip">have → has</span> <span class="rule-chip">go → goes</span> <span class="rule-chip">do → does</span>
+        </div>
+      </div>
+
+      <div style="overflow-x:auto;margin-bottom:1.25rem;">
+        <table class="gram-table">
+          <thead><tr>
+            <th>Emoji</th><th>Job</th>
+            <th style="background:#7C3AED;">I (action)</th>
+            <th style="background:#BE185D;">She / He (action)</th>
+          </tr></thead>
+          <tbody id="gram-tbody"></tbody>
+        </table>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Now you try — fill in the blanks!</div>
+      <div id="fill-container"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem;">
+        <button class="btn btn-gold" onclick="checkAllFills()">Check answers ✓</button>
+        <button class="btn" onclick="buildFillExercise()">Restart 🔄</button>
+        <button class="btn btn-terra" onclick="goTo(5)">Reading 📖</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: READING -->
+<section class="section" id="sec5">
+  <div class="section-title">📖 Reading</div>
+  <div class="section-desc">Read about a very special artist — then answer!</div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">🎨</div>
+      <div>
+        <div class="card-head-title">Meet Frida Kahlo</div>
+        <div class="card-head-sub">A famous artist from Mexico</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="reading-box">
+        <div class="reading-tag">Reading</div>
+        <div class="reading-img">🎨</div>
+        <div class="reading-title">Frida Kahlo — The Painter</div>
+        <div class="reading-sub">A real person with an amazing job!</div>
+        <div class="reading-body">
+          Frida Kahlo is a famous <strong>painter</strong> from Mexico.
+          She <em>paints</em> beautiful pictures. She <em>uses</em> lots of colours — red, blue, yellow and orange.<br><br>
+          Frida <em>works</em> in her studio. She <em>loves</em> flowers and animals.
+          She <em>wears</em> colourful clothes and flowers in her hair.<br><br>
+          Frida doesn't <strong>build</strong> houses. She doesn't <strong>drive</strong> a taxi.
+          She <em>paints</em> her life, her feelings and her world.<br><br>
+          She is an <strong>artist</strong>. Artists <em>create</em> beautiful things!
+        </div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;margin-top:1rem;">Answer the questions:</div>
+      <div id="reading-qs"></div>
+      <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-terra" onclick="goTo(6)">Guess Who? 🎤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: GUESS WHO -->
+<section class="section" id="sec6">
+  <div class="section-title">🎤 Guess Who?</div>
+  <div class="section-desc">Read the clues one by one — can you guess the job?</div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">🎤</div>
+      <div>
+        <div class="card-head-title">Guess the job!</div>
+        <div class="card-head-sub">Tap each clue to reveal it — then guess!</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="guess-rounds"></div>
+      <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-terra" onclick="goTo(7)">My Turn ✍️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: MY TURN -->
+<section class="section" id="sec7">
+  <div class="section-title">✍️ My Turn!</div>
+  <div class="section-desc">Choose a person you know — write about their job!</div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">✍️</div>
+      <div>
+        <div class="card-head-title">Tell me about someone!</div>
+        <div class="card-head-sub">A family member, a friend, or anyone you know!</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="background:var(--warm);border:1.5px solid var(--gold);border-radius:var(--r-lg);padding:1rem 1.25rem;margin-bottom:1rem;font-size:13px;color:var(--gray2);line-height:1.7;">
+        💡 <strong>Ideas:</strong> my mum is a teacher · my dad is a doctor · my uncle is a farmer · Frida is a painter
+      </div>
+      <div id="prod-rows"></div>
+      <div class="prod-story" id="prod-story">
+        <div class="prod-story-title">⭐ Read it out loud!</div>
+        <div id="prod-lines"></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem;">
+        <button class="btn btn-gold" onclick="buildProdStory()">Read it! 🌟</button>
+        <button class="btn" onclick="clearProd()">Clear ✕</button>
+        <button class="btn btn-terra" onclick="goTo(8)">See you! 🎊</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: SEE YOU -->
+<section class="section" id="sec8">
+  <div class="section-title">🎊 See You Next Time!</div>
+  <div class="section-desc">Say each phrase out loud — tap when you're done!</div>
+  <div class="closing-grid">
+    <div class="closing-card" onclick="markDone(this)"><div class="closing-icon">👋</div><div class="closing-en">Goodbye!</div><div class="closing-check">✅</div></div>
+    <div class="closing-card" onclick="markDone(this)"><div class="closing-icon">🙏</div><div class="closing-en">Thank you!</div><div class="closing-check">✅</div></div>
+    <div class="closing-card" onclick="markDone(this)"><div class="closing-icon">🎉</div><div class="closing-en">It was fun!</div><div class="closing-check">✅</div></div>
+    <div class="closing-card" onclick="markDone(this)"><div class="closing-icon">💪</div><div class="closing-en">I did great today!</div><div class="closing-check">✅</div></div>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;">
+    <div class="closing-card" onclick="markDone(this)" style="max-width:200px;"><div class="closing-icon">🏗️</div><div class="closing-en">I know 8 jobs!</div><div class="closing-check">✅</div></div>
+    <div class="closing-card" onclick="markDone(this)" style="max-width:200px;"><div class="closing-icon">🎨</div><div class="closing-en">She paints. He builds!</div><div class="closing-check">✅</div></div>
+  </div>
+  <div class="star-board">
+    <div style="font-family:var(--font-head);font-weight:900;font-size:17px;color:var(--gold);margin-bottom:0.5rem;">⭐ Stars earned today</div>
+    <div class="star-row" id="star-row">
+      <span class="star-slot" onclick="addStar(this)">🤍</span>
+      <span class="star-slot" onclick="addStar(this)">🤍</span>
+      <span class="star-slot" onclick="addStar(this)">🤍</span>
+      <span class="star-slot" onclick="addStar(this)">🤍</span>
+      <span class="star-slot" onclick="addStar(this)">🤍</span>
+    </div>
+    <div style="font-size:14px;font-weight:700;color:var(--gold);" id="star-earned">0 / 5 stars</div>
+  </div>
+  <div class="congrats-box">
+    <div style="font-size:48px;margin-bottom:0.75rem;">🎨</div>
+    <div class="congrats-title">Brilliant work, Gabriela!</div>
+    <div style="font-size:14px;opacity:0.9;line-height:1.7;margin-bottom:1.25rem;">You know 8 jobs and how to talk about them in 3rd person!</div>
+    <button onclick="downloadSummary()" style="padding:11px 28px;border-radius:var(--r-md);border:2px solid var(--gold2);background:var(--white);color:var(--terra);font-family:var(--font-head);font-weight:800;font-size:16px;cursor:pointer;">📥 Download summary</button>
+  </div>
+</section>
+
+<script>
+// ── NAV ──
+const TOTAL = 9;
+function goTo(i) {
+  document.querySelectorAll('.section').forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  document.getElementById('progress-fill').style.width=((i+1)/TOTAL*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── HELLO ──
+function pickResp(el){
+  document.querySelectorAll('.resp-chip').forEach(c=>c.classList.remove('picked'));
+  el.classList.add('picked');
+  const replies={
+    'I\'m great! 🌟':'Wonderful! Today we meet some amazing people at work! 🏗️',
+    'I\'m good! 😊':'Great! Ready to learn about jobs? 🌿',
+    'I\'m okay! 🙂':'That\'s fine! Let\'s have fun with jobs today! 🎨',
+    'I\'m tired! 😴':'Let\'s wake up with some cool jobs! ⚡',
+    'I\'m excited! 🎨':'Me too! We\'re learning about Frida Kahlo today! 🎨',
+  };
+  const r=document.getElementById('warmup-reply');
+  r.textContent=replies[el.textContent]||'Great!';
+  r.style.display='block';
+}
+
+// ── VIDEO INTRO TALK QUESTIONS ──
+const TALK_QS = [
+  { q:'What is your favourite job?', icon:'⭐' },
+  { q:'What do you want to be when you grow up?', icon:'🌟' },
+  { q:'Do you know anyone who is a doctor / teacher / farmer?', icon:'👀' },
+  { q:'What does your mum or dad do?', icon:'👨‍👩‍👧' },
+  { q:'Can you name 3 jobs in English?', icon:'🏆' },
+];
+
+function buildTalkQuestions() {
+  const box = document.getElementById('talk-qs');
+  if(!box) return;
+  box.innerHTML = '';
+  TALK_QS.forEach(item => {
+    const div = document.createElement('div');
+    div.style.cssText = 'background:var(--rust);border:2px solid var(--gold2);border-radius:var(--r-lg);padding:1rem 1.25rem;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:12px;';
+    div.innerHTML = `<span style="font-size:22px;flex-shrink:0;">${item.icon}</span>
+      <span style="font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--terra);">${item.q}</span>`;
+    div.onclick = () => {
+      div.style.background = 'var(--warm)';
+      div.style.borderColor = 'var(--terra)';
+    };
+    box.appendChild(div);
+  });
+}
+const JOBS_WARMUP = [
+  {emoji:'🏗️👷',job:'builder',      action:'He builds houses.'},
+  {emoji:'👩‍⚕️🏥',job:'doctor',       action:'She helps people.'},
+  {emoji:'🌾👨‍🌾',job:'farmer',        action:'He grows food.'},
+  {emoji:'⚽🏃‍♀️',job:'soccer player', action:'She scores goals.'},
+  {emoji:'🚕🚗', job:'taxi driver',   action:'He drives a taxi.'},
+  {emoji:'🎨🖌️', job:'artist/painter',action:'She paints pictures.'},
+  {emoji:'👩‍🏫📚',job:'teacher',       action:'She teaches students.'},
+  {emoji:'👩‍🍳🍳',job:'chef',          action:'He cooks food.'},
+];
+
+function buildJobGrid(){
+  const g=document.getElementById('job-grid');
+  g.innerHTML='';
+  JOBS_WARMUP.forEach(j=>{
+    const c=document.createElement('div');
+    c.className='job-card';
+    c.innerHTML=`<div class="job-emoji">${j.emoji}</div>
+      <div class="job-label">${j.job}</div>
+      <div class="job-action">${j.action}</div>`;
+    c.onclick=()=>c.classList.toggle('revealed');
+    g.appendChild(c);
+  });
+}
+function revealAllJobs(){document.querySelectorAll('.job-card').forEach(c=>c.classList.add('revealed'));}
+
+// ── VIDEO COMPREHENSION ──
+const COMP_QS = [
+  {q:'What does the builder do?', opts:['He builds houses','He grows food','He helps people'], ans:'He builds houses'},
+  {q:'What does the farmer do?',  opts:['She drives a taxi','She grows food','She scores goals'], ans:'She grows food'},
+  {q:'What does the doctor do?',  opts:['He teaches','He helps people','He builds'], ans:'He helps people'},
+];
+
+function buildCompQuestions(){
+  const box=document.getElementById('comp-container');
+  box.innerHTML='';
+  COMP_QS.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.className='comp-q';
+    div.innerHTML=`<div class="comp-q-text">Q${i+1}: ${item.q}</div>
+      <div class="comp-opts">${item.opts.map(o=>`<div class="comp-opt" onclick="checkComp(this,'${o}','${item.ans}')">${o}</div>`).join('')}</div>
+      <div style="font-size:12px;font-weight:700;margin-top:6px;min-height:16px;" id="comp-fb-${i}"></div>`;
+    box.appendChild(div);
+  });
+}
+
+function checkComp(el,chosen,correct){
+  const card=el.closest('.comp-q');
+  if(card.querySelector('.correct')) return;
+  if(chosen===correct){
+    el.classList.add('correct');
+    launchConfetti();
+  } else {
+    el.classList.add('wrong');
+    card.querySelectorAll('.comp-opt').forEach(o=>{if(o.textContent===correct)o.classList.add('show-ans');});
+  }
+  card.querySelectorAll('.comp-opt').forEach(o=>o.style.pointerEvents='none');
+}
+
+// ── MATCH ACTIVITY ──
+const MATCH_ITEMS = [
+  {emoji:'🏗️', job:'builder',       action:'builds houses',   color:'#FDE8D0'},
+  {emoji:'👩‍⚕️', job:'doctor',        action:'helps people',    color:'#FCE8F0'},
+  {emoji:'🌾', job:'farmer',         action:'grows food',      color:'#E8F5E3'},
+  {emoji:'⚽', job:'soccer player',  action:'scores goals',    color:'#E8EEF9'},
+  {emoji:'🚕', job:'taxi driver',    action:'drives a taxi',   color:'#FEF9D0'},
+  {emoji:'🎨', job:'artist',         action:'paints pictures', color:'#F5E8F5'},
+  {emoji:'👩‍🍳', job:'chef',           action:'cooks food',      color:'#FDE8D0'},
+];
+
+let matchSelected = null; // {type:'job'|'action', key, el}
+let matchedKeys = new Set();
+let matchScore = 0;
+
+function buildMatchActivity() {
+  matchSelected = null;
+  matchedKeys = new Set();
+  matchScore = 0;
+  document.getElementById('match-score').textContent = '0';
+
+  const grid = document.getElementById('match-grid');
+  if(!grid) return;
+
+  const shuffledJobs    = [...MATCH_ITEMS].sort(()=>Math.random()-0.5);
+  const shuffledActions = [...MATCH_ITEMS].sort(()=>Math.random()-0.5);
+
+  // Left col: jobs
+  const leftCol = document.createElement('div');
+  leftCol.className = 'match-col';
+  const lLabel = document.createElement('div');
+  lLabel.className = 'match-col-label';
+  lLabel.textContent = 'Jobs';
+  leftCol.appendChild(lLabel);
+  shuffledJobs.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'match-chip';
+    chip.dataset.key = item.job;
+    chip.dataset.type = 'job';
+    chip.innerHTML = `<span style="font-size:20px;">${item.emoji}</span><span>${item.job}</span>`;
+    chip.onclick = () => handleMatchClick('job', item.job, chip);
+    leftCol.appendChild(chip);
+  });
+
+  // Right col: actions
+  const rightCol = document.createElement('div');
+  rightCol.className = 'match-col';
+  const rLabel = document.createElement('div');
+  rLabel.className = 'match-col-label';
+  rLabel.textContent = 'Actions';
+  rightCol.appendChild(rLabel);
+  shuffledActions.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'match-chip';
+    chip.dataset.key = item.job;
+    chip.dataset.type = 'action';
+    chip.innerHTML = `<span style="font-size:16px;">⚡</span><span>${item.action}</span>`;
+    chip.onclick = () => handleMatchClick('action', item.job, chip);
+    rightCol.appendChild(chip);
+  });
+
+  grid.innerHTML = '';
+  grid.appendChild(leftCol);
+  grid.appendChild(rightCol);
+}
+
+function handleMatchClick(type, key, el) {
+  if(matchedKeys.has(key)) return;
+
+  // If nothing selected yet
+  if(!matchSelected) {
+    matchSelected = {type, key, el};
+    el.classList.add('selected');
+    return;
+  }
+
+  // Same type clicked again — just switch selection
+  if(matchSelected.type === type) {
+    matchSelected.el.classList.remove('selected');
+    matchSelected = {type, key, el};
+    el.classList.add('selected');
+    return;
+  }
+
+  // Different types — check if keys match
+  const correct = matchSelected.key === key;
+  if(correct) {
+    [matchSelected.el, el].forEach(c => {
+      c.classList.remove('selected');
+      c.classList.add('matched');
+    });
+    matchedKeys.add(key);
+    matchScore++;
+    document.getElementById('match-score').textContent = matchScore;
+    matchSelected = null;
+    if(matchScore === MATCH_ITEMS.length) launchConfetti();
+  } else {
+    // Wrong — flash red then reset
+    [matchSelected.el, el].forEach(c => {
+      c.classList.remove('selected');
+      c.classList.add('wrong-flash');
+    });
+    const prev = matchSelected;
+    matchSelected = null;
+    setTimeout(() => {
+      [prev.el, el].forEach(c => c.classList.remove('wrong-flash'));
+    }, 700);
+  }
+}
+
+function revealAllMatches() {
+  document.querySelectorAll('#match-grid .match-chip').forEach(chip => {
+    if(!matchedKeys.has(chip.dataset.key)) {
+      chip.classList.add('matched');
+      matchedKeys.add(chip.dataset.key);
+    }
+  });
+  matchScore = MATCH_ITEMS.length;
+  document.getElementById('match-score').textContent = matchScore;
+}
+
+// ── GRAMMAR TABLE ──
+const GRAM_DATA = [
+  {emoji:'🏗️',job:'builder',    i:'build',  shehe:'builds'},
+  {emoji:'👩‍⚕️',job:'doctor',    i:'help',   shehe:'helps'},
+  {emoji:'🌾',job:'farmer',     i:'grow',   shehe:'grows'},
+  {emoji:'⚽',job:'s. player',  i:'score',  shehe:'scores'},
+  {emoji:'🚕',job:'taxi driver',i:'drive',  shehe:'drives'},
+  {emoji:'🎨',job:'artist',     i:'paint',  shehe:'paints'},
+  {emoji:'👩‍🏫',job:'teacher',   i:'teach',  shehe:'teaches'},
+  {emoji:'👩‍🍳',job:'chef',      i:'cook',   shehe:'cooks'},
+];
+
+function buildGramTable(){
+  const tbody=document.getElementById('gram-tbody');
+  if(!tbody) return;
+  tbody.innerHTML='';
+  GRAM_DATA.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-size:20px;">${r.emoji}</td><td>${r.job}</td>
+      <td class="verb">${r.i}</td><td class="verb-s">${r.shehe}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── FILL EXERCISE ──
+const FILL_QS = [
+  {before:'A builder',  blank:'',   after:'houses.',      ans:'builds',  hint:'build'},
+  {before:'A teacher',  blank:'',   after:'in a school.', ans:'teaches', hint:'teach'},
+  {before:'A taxi driver',blank:'', after:'a taxi.',      ans:'drives',  hint:'drive'},
+  {before:'A soccer player',blank:'',after:'goals.',      ans:'scores',  hint:'score'},
+  {before:'A farmer',   blank:'',   after:'food.',        ans:'grows',   hint:'grow'},
+  {before:'A doctor',   blank:'',   after:'people.',      ans:'helps',   hint:'help'},
+];
+
+function buildFillExercise(){
+  const box=document.getElementById('fill-container');
+  box.innerHTML='';
+  FILL_QS.forEach((q,i)=>{
+    const row=document.createElement('div');
+    row.className='fill-row';
+    row.innerHTML=`<div class="fill-num">${i+1}.</div>
+      <div class="fill-text" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+        <span>${q.before}</span>
+        <input class="fill-input" id="fill-${i}" type="text" placeholder="(${q.hint})">
+        <span>${q.after}</span>
+      </div>
+      <div class="fill-fb" id="fill-fb-${i}"></div>`;
+    box.appendChild(row);
+  });
+}
+
+function checkAllFills(){
+  let allCorrect=true;
+  FILL_QS.forEach((q,i)=>{
+    const inp=document.getElementById('fill-'+i);
+    const fb=document.getElementById('fill-fb-'+i);
+    if(!inp) return;
+    const val=inp.value.trim().toLowerCase();
+    if(val===q.ans){
+      inp.style.borderColor='var(--green)'; inp.style.background='var(--green2)';
+      fb.textContent='✅'; fb.style.color='var(--green)';
+    } else {
+      inp.style.borderColor='var(--red)'; inp.style.background='var(--red2)';
+      fb.textContent='→ '+q.ans; fb.style.color='var(--red)';
+      allCorrect=false;
+    }
+  });
+  if(allCorrect) launchConfetti();
+}
+
+// ── READING QUESTIONS ──
+const READING_QS = [
+  {q:'What is Frida\'s job?',                opts:['She is a driver','She is a painter','She is a farmer'],     ans:'She is a painter'},
+  {q:'What does Frida use?',                 opts:['She uses bricks','She uses lots of colours','She uses food'],ans:'She uses lots of colours'},
+  {q:'Where does Frida work?',               opts:['In a hospital','In a school','In her studio'],              ans:'In her studio'},
+  {q:'True or False: Frida builds houses.',  opts:['True','False'],                                             ans:'False'},
+];
+
+function buildReadingQuestions(){
+  const box=document.getElementById('reading-qs');
+  box.innerHTML='';
+  READING_QS.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.className='comp-q';
+    div.innerHTML=`<div class="comp-q-text">Q${i+1}: ${item.q}</div>
+      <div class="comp-opts">${item.opts.map(o=>`<div class="comp-opt" onclick="checkComp(this,'${o}','${item.ans}')">${o}</div>`).join('')}</div>`;
+    box.appendChild(div);
+  });
+}
+
+// ── GUESS WHO ──
+const GUESS_ROUNDS = [
+  {
+    clues:[
+      'She works inside a building.',
+      'She uses a whiteboard.',
+      'She explains things to children.',
+      'She doesn\'t grow food.',
+      'She doesn\'t drive a taxi.',
+    ],
+    opts:['teacher','farmer','doctor','taxi driver'],
+    ans:'teacher'
+  },
+  {
+    clues:[
+      'He works outside.',
+      'He uses his hands and tools.',
+      'He makes things with bricks and wood.',
+      'He doesn\'t help sick people.',
+      'He doesn\'t score goals.',
+    ],
+    opts:['farmer','builder','chef','soccer player'],
+    ans:'builder'
+  },
+  {
+    clues:[
+      'She works in a kitchen.',
+      'She uses pots, pans and fire.',
+      'She creates delicious food.',
+      'She doesn\'t paint pictures.',
+      'She doesn\'t drive.',
+    ],
+    opts:['artist','teacher','chef','doctor'],
+    ans:'chef'
+  },
+];
+
+function buildGuessRounds(){
+  const box=document.getElementById('guess-rounds');
+  box.innerHTML='';
+  GUESS_ROUNDS.forEach((round,ri)=>{
+    const div=document.createElement('div');
+    div.className='clue-box';
+    div.style.marginBottom='1.25rem';
+    div.innerHTML=`<div class="clue-title">🔍 Mystery Job ${ri+1} — Read the clues one by one!</div>
+      <div class="clue-list">${round.clues.map((c,ci)=>`
+        <div class="clue-item" onclick="this.classList.add('shown')">
+          <div class="clue-num">${ci+1}</div>
+          <div class="clue-text">${c}</div>
+        </div>`).join('')}
+      </div>
+      <div class="answer-opts" style="margin-top:1rem;">
+        ${round.opts.map(o=>`<div class="answer-opt" onclick="checkGuess(this,'${o}','${round.ans}')">${o}</div>`).join('')}
+      </div>
+      <div style="font-size:13px;font-weight:700;margin-top:8px;min-height:18px;" id="guess-fb-${ri}"></div>`;
+    box.appendChild(div);
+  });
+}
+
+function checkGuess(el,chosen,correct){
+  const box=el.closest('.clue-box');
+  if(box.querySelector('.correct')) return;
+  const fb=box.querySelector('[id^="guess-fb"]');
+  if(chosen===correct){
+    el.classList.add('correct');
+    if(fb){fb.textContent='✅ Yes! It\'s a '+correct+'!';fb.style.color='var(--green)';}
+    launchConfetti();
+  } else {
+    el.classList.add('wrong');
+    if(fb){fb.textContent='❌ Try again!';fb.style.color='var(--red)';}
+    setTimeout(()=>{el.classList.remove('wrong');if(fb)fb.textContent='';},800);
+  }
+}
+
+// ── MY TURN PRODUCTION ──
+const PROD_PROMPTS = [
+  {label:'Who is this person?',    starter:'',                     placeholder:'e.g. My mum, my dad, Frida...'},
+  {label:'What is their job?',     starter:'She/He is a',          placeholder:'teacher, doctor, farmer...'},
+  {label:'What does she/he do?',   starter:'She/He',               placeholder:'teaches students / helps people...'},
+  {label:'What else does she/he do?',starter:'She/He also',        placeholder:'grows food / drives a car...'},
+  {label:'What doesn\'t she/he do?',starter:'She/He doesn\'t',     placeholder:'build houses / score goals...'},
+];
+
+function buildProdRows(){
+  const box=document.getElementById('prod-rows');
+  box.innerHTML='';
+  PROD_PROMPTS.forEach((p,i)=>{
+    const row=document.createElement('div');
+    row.className='production-card';
+    row.innerHTML=`<div class="prod-label">${p.label}</div>
+      ${p.starter?`<div class="prod-starter">${p.starter}...</div>`:''}
+      <input class="prod-input" id="prod-inp-${i}" type="text" placeholder="${p.placeholder}">`;
+    box.appendChild(row);
+  });
+}
+
+function buildProdStory(){
+  const lines=[];
+  const name=document.getElementById('prod-inp-0')?.value.trim();
+  const job=document.getElementById('prod-inp-1')?.value.trim();
+  const does1=document.getElementById('prod-inp-2')?.value.trim();
+  const does2=document.getElementById('prod-inp-3')?.value.trim();
+  const doesnt=document.getElementById('prod-inp-4')?.value.trim();
+  if(name)  lines.push(`👤 ${name}`);
+  if(job)   lines.push(`She/He is a ${job}.`);
+  if(does1) lines.push(`She/He ${does1}.`);
+  if(does2) lines.push(`She/He also ${does2}.`);
+  if(doesnt)lines.push(`She/He doesn't ${doesnt}.`);
+  if(!lines.length){alert('Write something first!');return;}
+  document.getElementById('prod-lines').innerHTML=lines.map(l=>`<div class="prod-line">${l}</div>`).join('');
+  document.getElementById('prod-story').classList.add('show');
+  launchConfetti();
+}
+
+function clearProd(){
+  PROD_PROMPTS.forEach((_,i)=>{const el=document.getElementById('prod-inp-'+i);if(el)el.value='';});
+  document.getElementById('prod-story').classList.remove('show');
+}
+
+// ── CLOSING ──
+function markDone(el){el.classList.toggle('done');}
+let starCount=0;
+function addStar(el){
+  if(el.textContent==='🤍'){el.textContent='⭐';starCount++;}
+  else{el.textContent='🤍';starCount--;}
+  starCount=Math.max(0,Math.min(5,starCount));
+  document.getElementById('star-earned').textContent=starCount+' / 5 stars';
+  if(starCount>=3)launchConfetti();
+}
+
+// ── CONFETTI ──
+function launchConfetti(){
+  const colors=['#9D4E6E','#C084A0','#F0C4D4','#5C7A5E','#A8C5A0','#FCE8F0'];
+  for(let i=0;i<40;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText='left:'+Math.random()*100+'vw;top:-10px;background:'+colors[Math.floor(Math.random()*colors.length)]+
+      ';width:'+(5+Math.random()*8)+'px;height:'+(5+Math.random()*8)+'px;animation-duration:'+
+      (1.5+Math.random()*2)+'s;animation-delay:'+Math.random()*0.5+'s;border-radius:'+Math.random()*6+'px;';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),3500);
+  }
+}
+
+document.addEventListener('mousemove',e=>{
+  if(Math.random()>0.35)return;
+  const s=document.createElement('div');
+  const sz=4+Math.random()*5;
+  const colors=['#9D4E6E','#C084A0','#F0C4D4','#A8C5A0'];
+  s.style.cssText=`position:fixed;pointer-events:none;z-index:9998;left:${e.clientX-sz/2}px;top:${e.clientY-sz/2}px;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:sparkle-fade ${0.3+Math.random()*0.4}s ease forwards;`;
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),700);
+});
+
+// ── DOWNLOAD ──
+function downloadSummary(){
+  const today=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const prodLines=[];
+  const name=document.getElementById('prod-inp-0')?.value.trim();
+  const job=document.getElementById('prod-inp-1')?.value.trim();
+  const does1=document.getElementById('prod-inp-2')?.value.trim();
+  const does2=document.getElementById('prod-inp-3')?.value.trim();
+  const doesnt=document.getElementById('prod-inp-4')?.value.trim();
+  if(name) prodLines.push(`<div class="s-line"><span>👤 ${name}</span></div>`);
+  if(job)  prodLines.push(`<div class="s-line"><span>She/He is a ${job}.</span></div>`);
+  if(does1)prodLines.push(`<div class="s-line"><span>She/He ${does1}.</span></div>`);
+  if(does2)prodLines.push(`<div class="s-line"><span>She/He also ${does2}.</span></div>`);
+  if(doesnt)prodLines.push(`<div class="s-line"><span>She/He doesn't ${doesnt}.</span></div>`);
+  const starsDisplay='⭐'.repeat(starCount)+'🤍'.repeat(5-starCount);
+  const html=`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Gabriela — Class 7</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Nunito Sans',sans-serif;background:#FEF9F0;color:#1F2937;padding:2rem 1rem;max-width:600px;margin:0 auto}
+.card{background:#fff;border-radius:20px;border:2px solid #FED7AA;overflow:hidden;margin-bottom:1.25rem}
+.card-head{background:linear-gradient(135deg,#6B2D47,#9D4E6E);padding:1.25rem 1.5rem}
+.head-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:#FCD34D}
+.head-sub{color:#FED7AA;font-size:12px;margin-top:2px}
+.section-head{background:linear-gradient(135deg,#6B2D47,#9D4E6E);padding:.75rem 1.25rem;display:flex;align-items:center;gap:8px}
+.section-title-text{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:#FCD34D}
+.section-body{padding:1.25rem}
+.s-line{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid #FED7AA;font-size:14px}
+.s-line:last-child{border-bottom:none}
+.stars{font-size:24px;letter-spacing:4px;margin:.5rem 0}
+.congrats{text-align:center;background:linear-gradient(135deg,#6B2D47,#9D4E6E);border-radius:20px;padding:1.5rem;color:#fff}
+.congrats-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:#FCD34D;margin-bottom:.25rem}
+.empty{color:#9CA3AF;font-style:italic;font-size:13px}</style>
+</head><body>
+<div class="card"><div class="card-head"><div class="head-title">🎨 Gabriela — Class 7</div><div class="head-sub">At Work! · ${today}</div></div></div>
+<div class="card"><div class="section-head"><span>✍️</span><span class="section-title-text">My Turn — My person</span></div><div class="section-body">${prodLines.join('')||'<p class="empty">Not completed.</p>'}</div></div>
+<div class="card"><div class="section-head"><span>🎊</span><span class="section-title-text">Stars</span></div><div class="section-body"><div class="stars">${starsDisplay}</div><div style="font-size:12px;color:#9CA3AF;">${starCount}/5 stars</div></div></div>
+<div class="congrats"><div style="font-size:40px;margin-bottom:.5rem">🎨</div><div class="congrats-title">Brilliant, Gabriela!</div><p style="font-size:13px;opacity:.9;margin-top:.25rem">She paints. He builds. You know 8 jobs! 🏗️</p></div>
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='gabriela-class7-atwork.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded',()=>{
+  buildTalkQuestions();
+  buildJobGrid();
+  buildMatchActivity();
+  buildGramTable();
+  buildFillExercise();
+  buildReadingQuestions();
+  buildGuessRounds();
+  buildProdRows();
+});
+</script>
+</body>
+</html>
