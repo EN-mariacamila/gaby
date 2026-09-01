@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Gabriela! 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink:    #10B981;
+  --pink2:   #6EE7B7;
+  --pink3:   #F0FDF4;
+  --pink4:   #D1FAE5;
+  --purple:  #DB2777;
+  --purple2: #F9A8D4;
+  --purple3: #FDF2F8;
+  --gold:    #EC4899;
+  --gold2:   #F9A8D4;
+  --gold3:   #FDF2F8;
+  --teal:    #0D9488;
+  --teal2:   #CCFBF1;
+  --cream:   #FFFBFE;
+  --white:   #FFFFFF;
+  --gray:    #6B7280;
+  --gray2:   #1F2937;
+  --font-head:'Nunito',sans-serif;
+  --font-body:'Nunito Sans',sans-serif;
+  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-xl:32px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--cream);color:var(--gray2);min-height:100vh;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpolygon points='12,1 15,9 23,9 17,14 19,22 12,17 5,22 7,14 1,9 9,9' fill='%23FBBF24'/%3E%3C/svg%3E") 12 12,auto}
+
+.topbar{background:linear-gradient(135deg,#065F46,#10B981,#DB2777);padding:0 1.5rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;overflow-x:auto;scrollbar-width:none;border-bottom:3px solid var(--gold2)}
+.topbar::-webkit-scrollbar{display:none}
+.topbar-logo{font-family:var(--font-head);font-weight:900;font-size:15px;color:var(--gold2);white-space:nowrap;margin-right:1rem;flex-shrink:0}
+.nav-btn{display:flex;align-items:center;gap:4px;padding:0.85rem 0.75rem;border:none;background:transparent;font-family:var(--font-head);font-size:13px;font-weight:800;color:rgba(255,255,255,0.75);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap;transition:color 0.15s,border-color 0.15s;flex-shrink:0}
+.nav-btn .ni{font-size:15px}
+.nav-btn:hover{color:var(--white)}
+.nav-btn.active{color:var(--white);border-bottom-color:var(--gold2)}
+.progress-bar-wrap{background:#065F46;height:5px}
+.progress-bar-fill{height:5px;background:linear-gradient(90deg,var(--pink2),var(--gold2));transition:width 0.4s}
+
+.section{display:none;padding:2rem 1.5rem;max-width:820px;margin:0 auto}
+.section.active{display:block}
+
+/* HERO */
+.hero-wrap{text-align:center;padding:2rem 1rem}
+.hero-emoji-row{font-size:48px;margin-bottom:1rem;animation:bounce 1s ease infinite alternate}
+@keyframes bounce{0%{transform:translateY(0)}100%{transform:translateY(-10px)}}
+.hero-title{font-family:var(--font-head);font-weight:900;font-size:clamp(28px,7vw,52px);background:linear-gradient(135deg,var(--pink),var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:0.5rem}
+.hero-sub{font-family:var(--font-head);font-weight:800;font-size:clamp(16px,4vw,24px);color:var(--purple);margin-bottom:1.5rem}
+.hero-card{background:var(--white);border-radius:var(--r-xl);border:3px solid var(--pink4);padding:2rem;box-shadow:0 8px 40px rgba(236,72,153,0.15);margin-bottom:1.5rem}
+.btn-start{background:linear-gradient(135deg,#065F46,#10B981,#DB2777);color:var(--white);border:none;border-radius:var(--r-xl);padding:16px 48px;font-family:var(--font-head);font-weight:900;font-size:18px;cursor:pointer;box-shadow:0 4px 20px rgba(236,72,153,0.4);transition:transform 0.15s,box-shadow 0.15s}
+.btn-start:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(236,72,153,0.5)}
+
+/* MESSAGES */
+.messages-intro{text-align:center;margin-bottom:1.5rem}
+.messages-intro-title{font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--pink);margin-bottom:0.5rem}
+.message-envelope{background:var(--white);border-radius:var(--r-xl);border:3px solid var(--pink4);padding:1.5rem;margin-bottom:1rem;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 20px rgba(236,72,153,0.08);text-align:center}
+.message-envelope:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(236,72,153,0.15)}
+.message-envelope.opened{cursor:default;transform:none}
+.envelope-front{display:flex;flex-direction:column;align-items:center;gap:8px}
+.envelope-emoji{font-size:52px}
+.envelope-hint{font-family:var(--font-head);font-weight:800;font-size:14px;color:var(--pink2)}
+.envelope-from{font-size:12px;color:var(--gray);font-weight:600}
+.message-content{display:none;margin-top:1rem;text-align:left}
+.message-content.show{display:block}
+.message-text{background:linear-gradient(135deg,var(--pink3),var(--purple3));border-radius:var(--r-lg);padding:1.25rem;font-size:15px;line-height:1.9;color:var(--gray2);font-style:italic;margin-bottom:0.75rem;border-left:4px solid var(--pink)}
+.message-reveal{background:linear-gradient(135deg,#065F46,#10B981);color:var(--white);border-radius:var(--r-lg);padding:0.875rem 1.25rem;text-align:center;cursor:pointer;font-family:var(--font-head);font-weight:900;font-size:15px}
+.message-sender{display:none;background:linear-gradient(135deg,var(--purple),var(--pink));color:var(--white);border-radius:var(--r-lg);padding:1rem 1.25rem;text-align:center}
+.message-sender.show{display:block}
+.message-sender-name{font-family:var(--font-head);font-weight:900;font-size:20px}
+.message-sender-emoji{font-size:36px;margin-bottom:4px}
+
+/* PARTY CHECKLIST */
+.party-title{font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--purple);margin-bottom:0.25rem;text-align:center}
+.party-desc{font-size:14px;color:var(--gray);text-align:center;margin-bottom:1.5rem}
+.party-section{margin-bottom:1.25rem}
+.party-section-label{font-family:var(--font-head);font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--purple);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.party-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.party-item{background:var(--white);border:2px solid var(--pink4);border-radius:var(--r-lg);padding:0.75rem 0.5rem;text-align:center;cursor:pointer;transition:all 0.15s;user-select:none}
+.party-item:hover{transform:translateY(-2px);border-color:var(--pink)}
+.party-item.selected{background:linear-gradient(135deg,var(--pink3),var(--purple3));border-color:var(--purple);transform:translateY(-2px);box-shadow:0 4px 14px rgba(139,92,246,0.2)}
+.party-item-emoji{font-size:28px;margin-bottom:4px}
+.party-item-name{font-family:var(--font-head);font-weight:800;font-size:12px;color:var(--gray2)}
+.party-item.selected .party-item-name{color:var(--purple)}
+.party-preview{display:none;background:linear-gradient(135deg,var(--pink3),var(--purple3));border:2px solid var(--pink2);border-radius:var(--r-xl);padding:1.25rem;margin-top:1rem}
+.party-preview.show{display:block}
+.party-preview-title{font-family:var(--font-head);font-weight:900;font-size:16px;color:var(--pink);margin-bottom:0.75rem}
+.party-preview-line{font-size:14px;color:var(--gray2);line-height:2;font-family:var(--font-head);font-weight:700}
+.party-preview-line span{color:var(--purple);font-weight:900}
+
+/* CAKE */
+.cake-wrap{text-align:center;padding:1rem 0}
+.cake-svg{width:200px;height:200px;margin:0 auto 1rem;display:block}
+.cake-title{font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--pink);margin-bottom:0.5rem}
+.cake-sub{font-size:15px;color:var(--gray);margin-bottom:1.5rem;font-weight:600}
+.blow-btn{background:linear-gradient(135deg,#065F46,#10B981);color:var(--white);border:none;border-radius:var(--r-xl);padding:14px 36px;font-family:var(--font-head);font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 4px 20px rgba(236,72,153,0.35);transition:all 0.15s;margin-bottom:1rem}
+.blow-btn:hover{transform:translateY(-2px);opacity:0.9}
+.wish-reveal{display:none;background:linear-gradient(135deg,var(--purple3),var(--pink3));border:2px solid var(--purple2);border-radius:var(--r-xl);padding:1.5rem;margin-top:1rem;text-align:center}
+.wish-reveal.show{display:block}
+.wish-title{font-family:var(--font-head);font-weight:900;font-size:20px;color:var(--purple);margin-bottom:0.5rem}
+
+/* SONG */
+.song-wrap{text-align:center;padding:1rem}
+.song-card{background:linear-gradient(135deg,#065F46,#10B981,#DB2777);border-radius:var(--r-xl);padding:2.5rem 2rem;color:var(--white);margin-bottom:1rem;box-shadow:0 8px 40px rgba(236,72,153,0.3)}
+.song-emoji{font-size:64px;margin-bottom:1rem;animation:bounce 0.8s ease infinite alternate}
+.song-title{font-family:var(--font-head);font-weight:900;font-size:24px;color:var(--gold2);margin-bottom:0.5rem}
+.song-sub{font-size:15px;opacity:0.9;line-height:1.7}
+
+/* CLOSING */
+.congrats-box{background:linear-gradient(135deg,#065F46,#10B981,#DB2777);border-radius:var(--r-xl);padding:2.5rem 2rem;text-align:center;color:var(--white);box-shadow:0 8px 40px rgba(236,72,153,0.3)}
+.congrats-title{font-family:var(--font-head);font-weight:900;font-size:28px;color:var(--gold2);margin-bottom:0.75rem}
+
+.btn{padding:9px 20px;border-radius:var(--r-md);border:1.5px solid var(--pink4);background:var(--white);font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:all 0.15s}
+.btn:hover{background:var(--pink3);border-color:var(--pink);color:var(--pink)}
+.btn-pink{background:linear-gradient(135deg,#065F46,#10B981);color:var(--white);border-color:#065F46;font-family:var(--font-head);font-weight:800}
+.btn-purple{background:linear-gradient(135deg,#831843,#DB2777);color:var(--white);border-color:#5B21B6;font-family:var(--font-head);font-weight:800}
+
+.btn,.nav-btn,.party-item,.message-envelope,.message-reveal,.blow-btn,.btn-start{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpolygon points='12,1 15,9 23,9 17,14 19,22 12,17 5,22 7,14 1,9 9,9' fill='%23FBBF24'/%3E%3C/svg%3E") 12 12,pointer}
+
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+@keyframes sparkle-fade{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0)}}
+.confetti-piece{position:fixed;pointer-events:none;animation:fall linear forwards;z-index:9999}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-logo">🎂 Happy Birthday!</div>
+  <button class="nav-btn active" onclick="goTo(0)" id="nav0"><span class="ni">🎉</span> Surprise!</button>
+  <button class="nav-btn" onclick="goTo(1)" id="nav1"><span class="ni">💌</span> Messages</button>
+  <button class="nav-btn" onclick="goTo(2)" id="nav2"><span class="ni">🎊</span> Your Party!</button>
+  <button class="nav-btn" onclick="goTo(3)" id="nav3"><span class="ni">🎂</span> Cake!</button>
+  <button class="nav-btn" onclick="goTo(4)" id="nav4"><span class="ni">🎯</span> Trivia!</button>
+  <button class="nav-btn" onclick="goTo(5)" id="nav5"><span class="ni">🌟</span> My Year!</button>
+  <button class="nav-btn" onclick="goTo(6)" id="nav6"><span class="ni">🎵</span> Music!</button>
+</nav>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:20%"></div></div>
+
+<!-- SEC 0: HERO -->
+<section class="section active" id="sec0">
+  <div class="hero-wrap">
+    <div class="hero-emoji-row">🎂✨🎉🌟🎈</div>
+    <div class="hero-title">Happy Birthday<br>Gabriela!</div>
+    <div class="hero-sub">Today is YOUR special day! 🌟</div>
+    <div class="hero-card">
+      <div style="font-size:18px;font-family:var(--font-head);font-weight:800;color:var(--purple);margin-bottom:1rem;">You have surprises waiting for you... 💌</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--gray2);margin-bottom:1.5rem;">
+        <div>💌 Secret messages from special people</div>
+        <div>🎊 Plan your dream birthday party!</div>
+        <div>🎂 Make a birthday wish!</div>
+        <div>🎵 Listen to your favourite music!</div>
+      </div>
+      <button class="btn-start" onclick="goTo(1);launchConfetti();launchConfetti();">Open your surprises! 🎉</button>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 1: MESSAGES -->
+<section class="section" id="sec1">
+  <div class="messages-intro">
+    <div class="messages-intro-title">💌 You have 3 secret messages!</div>
+    <div style="font-size:14px;color:var(--gray);font-weight:600;">Tap each envelope — read the message — then discover who sent it!</div>
+  </div>
+
+  <!-- ENVELOPE 1 — Emma Watson -->
+  <div class="message-envelope" id="env1" onclick="openEnvelope(1)">
+    <div class="envelope-front" id="env1-front">
+      <div class="envelope-emoji">💜</div>
+      <div class="envelope-hint">Tap to open!</div>
+      <div class="envelope-from">Message #1</div>
+    </div>
+    <div class="message-content" id="env1-content">
+      <div class="message-text">"Happy Birthday, Gabriela! Books taught me that the bravest thing you can do is be yourself. Today, celebrate exactly who you are — smart, creative and wonderful. Keep reading, keep dreaming and never stop learning. You are magic!"</div>
+      <div class="message-reveal" id="env1-reveal" onclick="revealSender(event,1)">Who sent this message? Tap to find out! 🔍</div>
+      <div class="message-sender" id="env1-sender">
+        <div class="message-sender-emoji">🧙‍♀️</div>
+        <div class="message-sender-name">Emma Watson</div>
+        <div style="font-size:13px;opacity:0.9;margin-top:4px;">With love ✨</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENVELOPE 2 — Matilda -->
+  <div class="message-envelope" id="env2" onclick="openEnvelope(2)">
+    <div class="envelope-front" id="env2-front">
+      <div class="envelope-emoji">📚</div>
+      <div class="envelope-hint">Tap to open!</div>
+      <div class="envelope-from">Message #2</div>
+    </div>
+    <div class="message-content" id="env2-content">
+      <div class="message-text">"Happy Birthday Gabriela! You know what I discovered? That books and imagination are the most powerful things in the world. I think you and I are very similar — we both know that being different is actually a superpower. Today is YOUR day. Enjoy every second of it!"</div>
+      <div class="message-reveal" id="env2-reveal" onclick="revealSender(event,2)">Who sent this message? Tap to find out! 🔍</div>
+      <div class="message-sender" id="env2-sender">
+        <div class="message-sender-emoji">✨</div>
+        <div class="message-sender-name">Matilda</div>
+        <div style="font-size:13px;opacity:0.9;margin-top:4px;">Your friend 📖</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENVELOPE 3 — Justin Bieber -->
+  <div class="message-envelope" id="env3" onclick="openEnvelope(3)">
+    <div class="envelope-front" id="env3-front">
+      <div class="envelope-emoji">🎵</div>
+      <div class="envelope-hint">Tap to open!</div>
+      <div class="envelope-from">Message #3</div>
+    </div>
+    <div class="message-content" id="env3-content">
+      <div class="message-text">"Hey Gabriela! Happy Birthday! I started singing just because I loved it — and look where that took me! Whatever YOU love doing, keep doing it with all your heart. Dance, sing, draw, dream — never stop. Have the best birthday ever!"</div>
+      <div class="message-reveal" id="env3-reveal" onclick="revealSender(event,3)">Who sent this message? Tap to find out! 🔍</div>
+      <div class="message-sender" id="env3-sender">
+        <div class="message-sender-emoji">🎤</div>
+        <div class="message-sender-name">Justin Bieber</div>
+        <div style="font-size:13px;opacity:0.9;margin-top:4px;">Love, Justin 🌟</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;display:flex;justify-content:center;">
+    <button class="btn btn-pink" onclick="goTo(2)">Plan your party! 🎊</button>
+  </div>
+</section>
+
+<!-- SEC 2: PARTY CHECKLIST -->
+<section class="section" id="sec2">
+  <div class="party-title">🎊 Plan Your Dream Party!</div>
+  <div class="party-desc">Choose everything for your perfect birthday party — tap to select!</div>
+
+  <div class="party-section">
+    <div class="party-section-label">🎨 Decoration</div>
+    <div class="party-grid" id="grid-deco"></div>
+  </div>
+  <div class="party-section">
+    <div class="party-section-label">🍰 Food & Drinks</div>
+    <div class="party-grid" id="grid-food"></div>
+  </div>
+  <div class="party-section">
+    <div class="party-section-label">🎮 Activities</div>
+    <div class="party-grid" id="grid-activities"></div>
+  </div>
+  <div class="party-section">
+    <div class="party-section-label">👯 Guests</div>
+    <div class="party-grid" id="grid-guests"></div>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:0.5rem;">
+    <button class="btn btn-purple" onclick="buildPartyPreview()">Show my party! 🎉</button>
+    <button class="btn btn-pink" onclick="goTo(3)">Cake time! 🎂</button>
+  </div>
+  <div class="party-preview" id="party-preview"></div>
+</section>
+
+<!-- SEC 3: CAKE -->
+<section class="section" id="sec3">
+  <div class="cake-wrap">
+    <div class="cake-title">🎂 Make a wish, Gabriela!</div>
+    <div class="cake-sub">Blow out the candles and wish for something special...</div>
+    <svg class="cake-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" id="cake-svg">
+      <!-- plate -->
+      <ellipse cx="100" cy="165" rx="80" ry="12" fill="#F3E8FF" stroke="#C4B5FD" stroke-width="2"/>
+      <!-- bottom tier -->
+      <rect x="30" y="120" width="140" height="50" rx="12" fill="#EC4899"/>
+      <rect x="30" y="120" width="140" height="16" rx="8" fill="#F9A8D4"/>
+      <!-- top tier -->
+      <rect x="50" y="75" width="100" height="50" rx="10" fill="#8B5CF6"/>
+      <rect x="50" y="75" width="100" height="14" rx="7" fill="#C4B5FD"/>
+      <!-- decorations bottom -->
+      <circle cx="60" cy="148" r="6" fill="#FDE68A"/>
+      <circle cx="85" cy="148" r="6" fill="#FDE68A"/>
+      <circle cx="110" cy="148" r="6" fill="#FDE68A"/>
+      <circle cx="135" cy="148" r="6" fill="#FDE68A"/>
+      <circle cx="160" cy="148" r="6" fill="#FDE68A"/>
+      <!-- decorations top -->
+      <circle cx="75" cy="100" r="5" fill="#FCE7F3"/>
+      <circle cx="100" cy="100" r="5" fill="#FCE7F3"/>
+      <circle cx="125" cy="100" r="5" fill="#FCE7F3"/>
+      <!-- candles -->
+      <rect x="82" y="52" width="10" height="26" rx="4" fill="#FDE68A" id="candle1"/>
+      <rect x="108" y="46" width="10" height="32" rx="4" fill="#F9A8D4" id="candle2"/>
+      <!-- flames -->
+      <ellipse cx="87" cy="48" rx="6" ry="9" fill="#F59E0B" id="flame1"/>
+      <ellipse cx="87" cy="48" rx="3" ry="5" fill="#FEF3C7" id="flame1b"/>
+      <ellipse cx="113" cy="42" rx="6" ry="9" fill="#F59E0B" id="flame2"/>
+      <ellipse cx="113" cy="42" rx="3" ry="5" fill="#FEF3C7" id="flame2b"/>
+    </svg>
+    <div id="blow-area">
+      <button class="blow-btn" onclick="blowCandles()">💨 Blow the candles!</button>
+    </div>
+    <div class="wish-reveal" id="wish-reveal">
+      <div style="font-size:48px;margin-bottom:0.75rem;">🌟</div>
+      <div class="wish-title">Now make a wish!</div>
+      <div style="font-size:15px;color:var(--purple);font-weight:700;margin-top:0.5rem;line-height:1.7;">Close your eyes... think of something special...<br>and wish with all your heart! ✨</div>
+      <div style="margin-top:1rem;font-size:13px;color:var(--gray);font-style:italic;">Don't tell anyone — or it won't come true! 🤫</div>
+    </div>
+    <div style="margin-top:1.5rem;display:flex;justify-content:center;">
+      <button class="btn btn-pink" onclick="goTo(6)">Music time! 🎵</button>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 4: TRIVIA -->
+<section class="section" id="sec4">
+  <div style="text-align:center;margin-bottom:1.5rem;">
+    <div style="font-size:48px;margin-bottom:0.5rem;">🎯</div>
+    <div style="font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--pink);margin-bottom:0.25rem;">Birthday Trivia!</div>
+    <div style="font-size:14px;color:var(--gray);font-weight:600;">Answer in English — tap each question!</div>
+  </div>
+  <div id="trivia-box"></div>
+  <div style="margin-top:1rem;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <button class="btn btn-pink" onclick="goTo(5)">My Year! 🌟</button>
+  </div>
+</section>
+
+<!-- SEC 5: BUCKET LIST -->
+<section class="section" id="sec5">
+  <div style="text-align:center;margin-bottom:1.5rem;">
+    <div style="font-size:48px;margin-bottom:0.5rem;">🌟</div>
+    <div style="font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--purple);margin-bottom:0.25rem;">My Birthday Year!</div>
+    <div style="font-size:14px;color:var(--gray);font-weight:600;">Choose 5 things you want to do this year — then say them in English!</div>
+  </div>
+  <div style="background:var(--white);border-radius:var(--r-xl);border:2px solid var(--pink4);padding:1.5rem;margin-bottom:1rem;">
+    <div style="font-size:12px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:1rem;">Tap to choose — then say: "This year I want to ___!"</div>
+    <div class="party-grid" id="bucket-grid"></div>
+    <div style="display:flex;justify-content:center;margin-top:1rem;">
+      <button class="btn btn-pink" onclick="buildBucketPreview()">Say it out loud! 🗣️</button>
+    </div>
+    <div class="party-preview" id="bucket-preview" style="margin-top:1rem;"></div>
+  </div>
+  <div class="congrats-box">
+    <div style="font-size:48px;margin-bottom:0.75rem;">🎂🌟🎉</div>
+    <div style="font-family:var(--font-head);font-weight:900;font-size:26px;color:var(--gold2);margin-bottom:0.75rem;">Happy Birthday, Gabriela!</div>
+    <div style="font-size:15px;opacity:0.9;line-height:1.8;">You are smart, creative and wonderful.<br>Keep dreaming big — the world is yours! 💚</div>
+  </div>
+</section>
+
+<!-- SEC 6: MUSIC -->
+<section class="section" id="sec6">
+  <div class="song-wrap">
+    <div class="song-card">
+      <div class="song-emoji">🎵</div>
+      <div class="song-title">Time for YOUR music!</div>
+      <div class="song-sub">What's your favourite song right now?<br>Let's listen to it together! 🎧</div>
+    </div>
+    <div style="background:var(--white);border-radius:var(--r-xl);border:2px solid var(--pink4);padding:1.5rem;margin-bottom:1rem;text-align:center;">
+      <div style="font-size:36px;margin-bottom:0.75rem;">🎤</div>
+      <div style="font-family:var(--font-head);font-weight:900;font-size:18px;color:var(--purple);margin-bottom:0.5rem;">What song do you want to hear?</div>
+      <div style="font-size:14px;color:var(--gray);margin-bottom:1rem;font-weight:600;">Tell your teacher — she'll play it for you! 🎧</div>
+      <div style="background:var(--pink3);border-radius:var(--r-lg);padding:1rem;font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--pink);">
+        💡 While you listen — can you say 3 things the artist loves doing?
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+const TOTAL=7;
+
+// ── BUBBLE SOUNDS ──
+function playBubble(freq=520, delay=0){
+  try {
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.connect(gain);gain.connect(ctx.destination);
+    osc.type='sine';
+    osc.frequency.setValueAtTime(freq*0.7, ctx.currentTime+delay);
+    osc.frequency.linearRampToValueAtTime(freq, ctx.currentTime+delay+0.06);
+    osc.frequency.linearRampToValueAtTime(freq*1.1, ctx.currentTime+delay+0.1);
+    gain.gain.setValueAtTime(0, ctx.currentTime+delay);
+    gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime+delay+0.04);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime+delay+0.18);
+    osc.start(ctx.currentTime+delay);
+    osc.stop(ctx.currentTime+delay+0.25);
+  } catch(e){}
+}
+function playChime(){
+  // 3 bubbles in cascade
+  playBubble(440, 0);
+  playBubble(560, 0.13);
+  playBubble(680, 0.26);
+}
+function playSoftChime(){
+  // single soft bubble
+  playBubble(520, 0);
+}
+
+function goTo(i){playChime();
+  document.querySelectorAll('.section').forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  document.querySelectorAll('.nav-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  document.getElementById('progress-fill').style.width=((i+1)/TOTAL*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── ENVELOPES ──
+function openEnvelope(n){
+  const env=document.getElementById('env'+n);
+  const content=document.getElementById('env'+n+'-content');
+  const front=document.getElementById('env'+n+'-front');
+  if(env.classList.contains('opened'))return;
+  env.classList.add('opened');playChime();
+  front.style.display='none';
+  content.classList.add('show');
+  launchConfetti();
+}
+
+function revealSender(e,n){
+  e.stopPropagation();
+  document.getElementById('env'+n+'-reveal').style.display='none';playChime();
+  document.getElementById('env'+n+'-sender').classList.add('show');
+  launchConfetti();launchConfetti();
+}
+
+// ── PARTY CHECKLIST ──
+const PARTY_DATA={
+  deco:[
+    {emoji:'🌸',name:'Flowers'},
+    {emoji:'🎈',name:'Balloons'},
+    {emoji:'✨',name:'Glitter'},
+    {emoji:'🎩',name:'Magic hats'},
+    {emoji:'⭐',name:'Stars'},
+    {emoji:'🦋',name:'Butterflies'},
+    {emoji:'🌈',name:'Rainbow'},
+    {emoji:'💜',name:'Purple lights'},
+  ],
+  food:[
+    {emoji:'🎂',name:'Birthday cake'},
+    {emoji:'🍕',name:'Pizza'},
+    {emoji:'🍦',name:'Ice cream'},
+    {emoji:'🍩',name:'Donuts'},
+    {emoji:'🍓',name:'Strawberries'},
+    {emoji:'🧁',name:'Cupcakes'},
+    {emoji:'🍫',name:'Chocolate'},
+    {emoji:'🥤',name:'Smoothies'},
+  ],
+  activities:[
+    {emoji:'🎨',name:'Painting'},
+    {emoji:'💃',name:'Dancing'},
+    {emoji:'🎵',name:'Karaoke'},
+    {emoji:'🎮',name:'Video games'},
+    {emoji:'📚',name:'Reading'},
+    {emoji:'🎬',name:'Movie'},
+    {emoji:'⛸️',name:'Skating'},
+    {emoji:'🎩',name:'Magic show'},
+  ],
+  guests:[
+    {emoji:'🧙‍♀️',name:'Emma Watson'},
+    {emoji:'📖',name:'Matilda'},
+    {emoji:'🎤',name:'Justin Bieber'},
+    {emoji:'⚡',name:'Harry Potter'},
+    {emoji:'👯',name:'Best friend'},
+    {emoji:'🐕',name:'A puppy!'},
+    {emoji:'👨‍👩‍👧',name:'Family'},
+    {emoji:'🦄',name:'A unicorn!'},
+  ],
+};
+
+function buildPartyGrid(items, gridId){
+  const grid=document.getElementById(gridId);
+  if(!grid)return;
+  grid.innerHTML='';
+  items.forEach(item=>{
+    const div=document.createElement('div');
+    div.className='party-item';
+    div.innerHTML=`<div class="party-item-emoji">${item.emoji}</div><div class="party-item-name">${item.name}</div>`;
+    div.addEventListener('click',()=>{
+      div.classList.toggle('selected');playSoftChime();
+      if(div.classList.contains('selected'))launchConfetti();
+    });
+    grid.appendChild(div);
+  });
+}
+
+function buildPartyPreview(){
+  const getSelected=gridId=>[...document.querySelectorAll(`#${gridId} .party-item.selected`)].map(el=>el.querySelector('.party-item-emoji').textContent+' '+el.querySelector('.party-item-name').textContent);
+  const deco=getSelected('grid-deco');
+  const food=getSelected('grid-food');
+  const acts=getSelected('grid-activities');
+  const guests=getSelected('grid-guests');
+  if(!deco.length&&!food.length&&!acts.length&&!guests.length){alert('Choose something first!');return;}
+  const preview=document.getElementById('party-preview');
+  let html='<div class="party-preview-title">🎊 Gabriela\'s Dream Party!</div>';
+  if(deco.length) html+=`<div class="party-preview-line">🎨 My party has <span>${deco.join(', ')}</span>!</div>`;
+  if(food.length) html+=`<div class="party-preview-line">🍰 We are eating <span>${food.join(', ')}</span>!</div>`;
+  if(acts.length) html+=`<div class="party-preview-line">🎮 We are <span>${acts.join(', ')}</span>!</div>`;
+  if(guests.length) html+=`<div class="party-preview-line">👯 My guests are <span>${guests.join(', ')}</span>!</div>`;
+  preview.innerHTML=html;
+  preview.classList.add('show');
+  launchConfetti();launchConfetti();
+}
+
+// ── CAKE ──
+let candlesBlown=false;
+function blowCandles(){
+  if(candlesBlown)return;
+  candlesBlown=true;playChime();
+  ['flame1','flame1b','flame2','flame2b'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.style.display='none';
+  });
+  document.getElementById('blow-area').innerHTML='<div style="font-size:32px;margin-bottom:0.5rem;">💨✨</div>';
+  document.getElementById('wish-reveal').classList.add('show');
+  launchConfetti();launchConfetti();launchConfetti();
+}
+
+// ── CONFETTI ──
+function launchConfetti(){
+  const colors=['#EC4899','#F9A8D4','#8B5CF6','#C4B5FD','#F59E0B','#FDE68A','#FFFFFF','#FCE7F3'];
+  for(let i=0;i<45;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText='left:'+Math.random()*100+'vw;top:-10px;background:'+colors[Math.floor(Math.random()*colors.length)]+';width:'+(5+Math.random()*9)+'px;height:'+(5+Math.random()*9)+'px;animation-duration:'+(1.5+Math.random()*2.5)+'s;animation-delay:'+Math.random()*0.5+'s;border-radius:'+Math.random()*6+'px;';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),4000);
+  }
+}
+
+document.addEventListener('mousemove',e=>{
+  if(Math.random()>0.3)return;
+  const s=document.createElement('div');
+  const sz=4+Math.random()*6;
+  const colors=['#EC4899','#8B5CF6','#F59E0B','#F9A8D4','#C4B5FD'];
+  s.style.cssText=`position:fixed;pointer-events:none;z-index:9998;left:${e.clientX-sz/2}px;top:${e.clientY-sz/2}px;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:sparkle-fade ${0.3+Math.random()*0.5}s ease forwards;`;
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),800);
+});
+
+
+// ── TRIVIA ──
+const TRIVIA_QS=[
+  {icon:'🎂', q:'How old are you today?',                      hint:'I am ___ years old!'},
+  {icon:'💚', q:'What is your favourite colour?',              hint:'My favourite colour is ___!'},
+  {icon:'💃', q:'What do you love doing?',                     hint:'I love ___ing!'},
+  {icon:'📅', q:'What do you like doing on Saturdays?',        hint:'On Saturdays I like ___ing!'},
+  {icon:'😤', q:'What do you hate doing?',                     hint:'I hate ___ing!'},
+  {icon:'🌟', q:'What is your birthday wish this year?',       hint:'This year I want to ___!'},
+];
+
+function buildTrivia(){
+  const box=document.getElementById('trivia-box');
+  if(!box)return;
+  box.innerHTML='';
+  TRIVIA_QS.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.style.cssText='background:var(--white);border:1.5px solid var(--pink4);border-radius:var(--r-lg);padding:1rem 1.25rem;margin-bottom:8px;cursor:pointer;transition:all 0.15s;';
+    div.innerHTML=`<div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:22px;">${item.icon}</span>
+      <span style="font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--gray2);flex:1;">${item.q}</span>
+      <span style="font-size:11px;color:var(--pink);font-weight:700;">tap for hint</span>
+    </div>
+    <div id="th-${i}" style="display:none;margin-top:8px;padding:6px 10px;background:var(--pink3);border-left:3px solid var(--pink);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:13px;color:var(--pink);font-weight:700;">${item.hint}</div>`;
+    div.addEventListener('click',()=>{
+      playSoftChime();
+      div.style.borderColor='var(--pink)';div.style.background='var(--pink3)';
+      const hint=document.getElementById('th-'+i);
+      hint.style.display=hint.style.display==='block'?'none':'block';
+    });
+    box.appendChild(div);
+  });
+}
+
+// ── BUCKET LIST ──
+const BUCKET_ITEMS=[
+  {emoji:'✈️',name:'Travel somewhere new'},
+  {emoji:'📚',name:'Read 10 books'},
+  {emoji:'🎨',name:'Paint something big'},
+  {emoji:'💃',name:'Learn a new dance'},
+  {emoji:'⛸️',name:'Go skating'},
+  {emoji:'🎵',name:'Go to a concert'},
+  {emoji:'🐶',name:'Meet a puppy'},
+  {emoji:'🌊',name:'Go to the beach'},
+  {emoji:'🎬',name:'Watch a new movie'},
+  {emoji:'🌟',name:'Learn something new'},
+  {emoji:'🍕',name:'Try a new food'},
+  {emoji:'🏆',name:'Win something'},
+];
+
+function buildBucketGrid(){
+  const grid=document.getElementById('bucket-grid');
+  if(!grid)return;
+  grid.innerHTML='';
+  BUCKET_ITEMS.forEach(item=>{
+    const div=document.createElement('div');
+    div.className='party-item';
+    div.innerHTML=`<div class="party-item-emoji">${item.emoji}</div><div class="party-item-name">${item.name}</div>`;
+    div.addEventListener('click',()=>{
+      div.classList.toggle('selected');
+      playSoftChime();
+      if(div.classList.contains('selected'))launchConfetti();
+    });
+    grid.appendChild(div);
+  });
+}
+
+function buildBucketPreview(){
+  const selected=[...document.querySelectorAll('#bucket-grid .party-item.selected')].map(el=>el.querySelector('.party-item-emoji').textContent+' '+el.querySelector('.party-item-name').textContent);
+  if(!selected.length){alert('Choose something first!');return;}
+  const preview=document.getElementById('bucket-preview');
+  preview.innerHTML='<div class="party-preview-title">🌟 This year, Gabriela wants to...</div>'+selected.map(s=>`<div class="party-preview-line">→ <span>${s}</span></div>`).join('');
+  preview.classList.add('show');
+  playChime();launchConfetti();launchConfetti();
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  buildPartyGrid(PARTY_DATA.deco,'grid-deco');
+  buildPartyGrid(PARTY_DATA.food,'grid-food');
+  buildPartyGrid(PARTY_DATA.activities,'grid-activities');
+  buildPartyGrid(PARTY_DATA.guests,'grid-guests');
+  buildTrivia();
+  buildBucketGrid();
+  launchConfetti();launchConfetti();
+});
+</script>
+</body>
+</html>
